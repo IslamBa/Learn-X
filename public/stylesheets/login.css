@@ -30,10 +30,22 @@
   color: white !important;
 }
 
+.input-field input[type=date],
+.input-field input[type=text],
+.input-field input[type=email],
+.input-field input[type=password] {
+  border-bottom: 1px solid white !important;
+  box-shadow: none !important;
+}
+
 .input-field input[type=date]:focus,
 .input-field input[type=text]:focus,
 .input-field input[type=email]:focus,
 .input-field input[type=password]:focus {
   border-bottom: 2px solid white !important;
   box-shadow: none;
+}
+
+.login_buttons{
+    padding-top:30px;
 }

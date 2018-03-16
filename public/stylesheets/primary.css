@@ -9,9 +9,39 @@ body{
 	height: 100%;
 	background: linear-gradient(to bottom,  rgb(57, 187, 235), rgb(68, 118, 187));
 	font-family: 'Source Sans Pro', sans-serif;
+	color: white;
 }
 
 .vertical-center {
 	display: flex;  /* make the row a flex container */
 	align-items: center; /* vertically center each flex item in the container */
+}
+.btn_white{
+    border-radius:50px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    background-color: white;
+    color: #2BABE2 !important;
+}
+.btn_white:hover {
+    background-color: white;
+}
+.btn_white:active{
+    background-color: rgb(196, 196, 196);
+}
+.btn_dark{
+    border-radius:50px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    background-color: transparent;
+	color: white !important;
+	border:2px solid white;
+}
+.btn_dark:hover {
+    background-color: transparent;
+}
+.btn_dark:active{
+    background-color: rgb(196, 196, 196);
 }
