@@ -1,0 +1,39 @@
+.lgn_con{
+    padding-top:80px;
+    color:white;
+    font-weight: 300;
+}
+
+#h1_title{
+    font-weight: 300;
+    font-size:50px;
+}
+
+#x_title{
+    font-size:80px;
+}
+
+.login_daten{
+ 
+    padding-top: 50px;
+}
+
+.input-field label {
+    color: white;
+    font-size: 20px;
+}
+
+.input-field input[type=date]:focus + label,
+.input-field input[type=text]:focus + label,
+.input-field input[type=email]:focus + label,
+.input-field input[type=password]:focus + label {
+  color: white !important;
+}
+
+.input-field input[type=date]:focus,
+.input-field input[type=text]:focus,
+.input-field input[type=email]:focus,
+.input-field input[type=password]:focus {
+  border-bottom: 2px solid white !important;
+  box-shadow: none;
+}
