@@ -69,7 +69,15 @@ a {
 .linkRow{
     height: 100%;
     margin-left: -1rem !important;
+    margin-right: -1rem !important;
 }
+
+@media (max-width: 992px) { 
+    .linkRow{
+        margin-left: -1.2rem !important;
+        margin-right: -1.2rem !important;
+    }
+ }
 
 .navLink{
     line-height: 45px;
@@ -84,4 +92,7 @@ a {
 
 hr {
     background-color: white;
+}
+.navIcons{
+    line-height: unset !important;
 }
