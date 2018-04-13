@@ -58,3 +58,7 @@ a {
 .text-oben{
     font-size:45px;
 }
+
+.drop-text{
+    display : none;
+}
