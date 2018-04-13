@@ -10,4 +10,9 @@ router.get('/learnx', function(req, res, next) {
   res.render('login');
 });
 
+router.get('/registrieren', function(req, res, next) {
+  res.render('registrieren');
+});
+
+
 module.exports = router;

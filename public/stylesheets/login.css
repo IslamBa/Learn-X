@@ -47,3 +47,7 @@
 .login_buttons{
     padding-top:30px;
 }
+
+a {
+    text-decoration: none;
+}
