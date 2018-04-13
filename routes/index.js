@@ -18,5 +18,9 @@ router.get('/home', function(req, res, next) {
   res.render('home');
 });
 
+router.get('/fragen', function(req, res){
+  res.render('fragen')
+});
+
 
 module.exports = router;
