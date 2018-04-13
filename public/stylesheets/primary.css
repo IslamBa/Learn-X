@@ -71,6 +71,12 @@ a {
     margin-left: -1rem !important;
 }
 
+@media (max-width: 992px) { 
+    .linkRow{
+        margin-left: -1.2rem !important;
+    }
+ }
+
 .navLink{
     line-height: 45px;
     font-size: 18px;
