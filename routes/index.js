@@ -10,4 +10,13 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+router.get('/registrieren', function(req, res, next) {
+  res.render('registrieren');
+});
+
+router.get('/home', function(req, res, next) {
+  res.render('home');
+});
+
+
 module.exports = router;
