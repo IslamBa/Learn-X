@@ -59,10 +59,9 @@ a {
     font-size:45px;
 }
 
-<<<<<<< HEAD
 .drop-text{
     display : none;
-=======
+}
 .bottomNav{
     height:50px;
     border-radius: 25px;
@@ -90,5 +89,4 @@ a {
     background-color: white;
     color: #2BABE2;
     border-radius:25px;
->>>>>>> c643f6b372ff551232a032e29f0195aaa942ddd7
 }
