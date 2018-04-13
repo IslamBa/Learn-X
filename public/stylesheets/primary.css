@@ -59,6 +59,30 @@ a {
     font-size:45px;
 }
 
+<<<<<<< HEAD
 .drop-text{
     display : none;
+=======
+.bottomNav{
+    height:50px;
+    border-radius: 25px;
+    border: 2px solid white;
+    margin-bottom: 10px;
+}
+
+.linkRow{
+    height: 100%;
+    margin-left: -1rem !important;
+}
+
+.navLink{
+    line-height: 45px;
+    font-size: 18px;
+}
+
+.activeLink{
+    background-color: white;
+    color: #2BABE2;
+    border-radius:25px;
+>>>>>>> feeee013bff61f0be55d10744ea6f882f5203013
 }
