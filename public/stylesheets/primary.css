@@ -54,3 +54,7 @@ body{
 a {
     text-decoration: none !important;
 }
+
+.text-oben{
+    font-size:45px;
+}
