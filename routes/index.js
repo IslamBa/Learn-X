@@ -23,5 +23,9 @@ router.get('/fragen', function(req, res){
   res.render('fragen')
 });
 
+router.get('/impressum', function(req, res){
+  res.render('impressum')
+});
+
 
 module.exports = router;
