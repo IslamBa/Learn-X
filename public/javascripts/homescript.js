@@ -50,5 +50,5 @@ $(".main").onepage_scroll({
     responsiveFallback: false,        
                                      
                                      
-    direction: "vertical"      
+    direction: "horizontal"      
  });
