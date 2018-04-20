@@ -110,12 +110,11 @@ hr {
     color : white;
 }
 
-<<<<<<< HEAD
 .text-unten{
     font-family: 'Quicksand', sans-serif;
     font-size:35px;
     font-weight: 300;
-=======
+}
 .group_row{
     background-color: white;
     color:#2BABE2;
@@ -136,5 +135,4 @@ hr {
 
 .group_col{
 padding-left: 0px;
->>>>>>> 1611a6c0fba6704f65506155371f5762f89cb562
 }
