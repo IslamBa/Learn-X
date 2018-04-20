@@ -1,4 +1,13 @@
 $(".navLink").click(function () {
+    //OnePage wechsel mit unterer Navigation
+    if ($(this).index() > $(".activeLink").index()) {
+        $(".main").moveDown();
+    }
+    if ($(this).index() < $(".activeLink").index()) {
+        $(".main").moveUp();
+    }
+
+    //Untere Navigation Icons/Text wechsel
     $(".navLink").each(function () {
         $(this).removeClass("activeLink");
         $(this).empty();
@@ -37,18 +46,18 @@ $(".navLink").click(function () {
 })
 
 $(".main").onepage_scroll({
-    sectionContainer: "section",     
-    easing: "ease",                  
-                                     
-    animationTime: 1000,             
-    pagination: true,                
-    updateURL: false,                
-    beforeMove: function(index) {},  
-    afterMove: function(index) {},   
-    loop: false,                     
-    keyboard: true,                  
-    responsiveFallback: false,        
-                                     
-                                     
-    direction: "horizontal"      
- });
+    sectionContainer: "section",
+    easing: "ease",
+
+    animationTime: 1000,
+    pagination: false,
+    updateURL: false,
+    beforeMove: function (index) { },
+    afterMove: function (index) { },
+    loop: false,
+    keyboard: true,
+    responsiveFallback: false,
+
+
+    direction: "horizontal"
+});
