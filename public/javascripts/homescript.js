@@ -1,10 +1,20 @@
+$("body").bind("mousewheel", function () { return false; });
+
 $(".navLink").click(function () {
     //OnePage wechsel mit unterer Navigation
+    var unterschied = Math.abs($(this).index() - $(".activeLink").index());
+
     if ($(this).index() > $(".activeLink").index()) {
-        $(".main").moveDown();
+        while (unterschied != 0) {
+            $(".main").moveDown();
+            unterschied -= 1;
+        };
     }
     if ($(this).index() < $(".activeLink").index()) {
-        $(".main").moveUp();
+        while (unterschied != 0) {
+            $(".main").moveUp();
+            unterschied -= 1;
+        };
     }
 
     //Untere Navigation Icons/Text wechsel
@@ -52,8 +62,10 @@ $(".main").onepage_scroll({
     animationTime: 1000,
     pagination: false,
     updateURL: false,
-    beforeMove: function (index) { },
-    afterMove: function (index) { },
+    beforeMove: function (index) {
+    },
+    afterMove: function (index) {
+    },
     loop: false,
     keyboard: true,
     responsiveFallback: false,
@@ -61,3 +73,4 @@ $(".main").onepage_scroll({
 
     direction: "horizontal"
 });
+
