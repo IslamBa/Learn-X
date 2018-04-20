@@ -24,7 +24,7 @@ body{
     width: 300px;
     height: 50px;
     font-weight: 300px;
-    font-size: 30px;
+    font-size: 25px;
     background-color: white;
     color: #2BABE2 !important;
     line-height: 50px;
@@ -41,7 +41,7 @@ body{
     width: 300px;
     height: 50px;
     font-weight: 300px;
-    font-size: 30px;
+    font-size: 25px;
     background-color: transparent;
 	color: white !important;
     border:2px solid white;
@@ -108,4 +108,26 @@ hr {
 
 .imp{
     color : white;
+}
+
+.group_row{
+    background-color: white;
+    color:#2BABE2;
+    height: 70px;
+}
+
+.group_name{
+    line-height: 35px;
+    padding-left: 10px;
+}
+
+.group_status{
+    width: 35px;
+    height: 35px;
+    background-color: #56cd56;
+    margin-top: 17px;
+}
+
+.group_col{
+padding-left: 0px;
 }
