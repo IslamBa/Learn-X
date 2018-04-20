@@ -109,3 +109,9 @@ hr {
 .imp{
     color : white;
 }
+
+.text-unten{
+    font-family: 'Quicksand', sans-serif;
+    font-size:35px;
+    font-weight: 300;
+}
