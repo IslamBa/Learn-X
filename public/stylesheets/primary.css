@@ -23,6 +23,7 @@ body{
     border-radius:50px;
     width: 300px;
     height: 50px;
+    font-weight: 300px;
     font-size: 30px;
     background-color: white;
     color: #2BABE2 !important;
@@ -39,6 +40,7 @@ body{
     border-radius:50px;
     width: 300px;
     height: 50px;
+    font-weight: 300px;
     font-size: 30px;
     background-color: transparent;
 	color: white !important;
@@ -59,6 +61,7 @@ a {
 
 .text-oben{
     font-size:45px;
+    font-weight: 300;
 }
 
 .drop-text{
