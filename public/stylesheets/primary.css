@@ -60,6 +60,7 @@ a {
 }
 
 .text-oben{
+    font-family: 'Quicksand', sans-serif;
     font-size:45px;
     font-weight: 300;
 }
@@ -103,4 +104,8 @@ hr {
 }
 .navIcons{
     line-height: unset !important;
+}
+
+.imp{
+    color : white;
 }
