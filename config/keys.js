@@ -1,8 +1,8 @@
 module.exports = {
-    postgreSQL:{
-        user:"postgres",
+    MySQL:{
+        user:"root",
         host:"localhost",
-        database:"learnxbeta",
-        password:"postgres"
+        database:"learnx",
+        password:""
     }
 }

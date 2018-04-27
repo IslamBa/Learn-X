@@ -2,8 +2,8 @@ const { query, nonQuery } = require("./../config/postgresql-common");
 
 async function getUsers() {
     try {
-        let result = await query("SELECT row_to_json(benutzer) as obj FROM benutzer");
-        console.log(result);
+        let result = await query("SELECT * FROM benutzer");
+        console.log(result + " bei funktion getUsers()");
         return result;
     }
     catch (error) {

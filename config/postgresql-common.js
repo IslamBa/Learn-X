@@ -1,11 +1,11 @@
-const { Client } = require("pg");
-const { postgreSQL } = require("./keys");
+var mysql = require('mysql');
+const { MySQL } = require("./keys");
 
-const client = new Client(postgreSQL);
+var con = mysql.createConnection(MySQL);
 
 async function connect() {
     try {
-        await client.connect();
+        await con.connect();
         console.log("connected!");
     } catch (error) {
         console.log(error);
@@ -15,21 +15,13 @@ async function connect() {
 connect();
 
 async function query(queryString, param) {
-    try {
-        let res = await client.query(queryString, param);
-        let resultArray = [];
-        for (let row of res.rows)
-            resultArray.push(row.obj);
-
-        return resultArray;
-    } catch (error) {
-        console.log(error);
-    }
+    let res = await con.query(queryString);
+    console.log(res.results);
 }
 
-async function nonQuery(queryString, param) {
+function nonQuery(queryString, param) {
     try {
-        await client.query(queryString, param);
+        client.query(queryString, param);
     } catch (error) {
         console.log(error);
     }
