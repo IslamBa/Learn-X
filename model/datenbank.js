@@ -1,19 +1,14 @@
-async function connecting() {
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'learnxbeta',
-        password: 'postgres'
-    });
+const { query, nonQuery } = require("./../config/postgresql-common");
 
-    await client.connect();
-
-    const res = await client.query('SELECT * FROM benutzer');
-    console.log(res.rows[0].name); // Hello world!
-    await client.end();
+async function getUsers() {
+    try {
+        let result = await query("SELECT row_to_json(benutzer) as obj FROM benutzer");
+        console.log(result);
+        return result;
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
-module.exports = {
-    connecting
-}
+module.exports = { getUsers };

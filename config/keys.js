@@ -2,7 +2,7 @@ module.exports = {
     postgreSQL:{
         user:"postgres",
         host:"localhost",
-        database:"learnx",
+        database:"learnxbeta",
         password:"postgres"
     }
 }

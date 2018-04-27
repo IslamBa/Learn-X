@@ -3,8 +3,8 @@ var router = express.Router();
 var modelDatenbank = require('./../model/datenbank');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', datenbank : modelDatenbank.connecting() });
+router.get('/', async function(req, res, next) {
+  res.render('index', { title: 'Express', datenbank : await modelDatenbank.getUsers() });
 });
 
 router.get('/login', function(req, res, next) {
