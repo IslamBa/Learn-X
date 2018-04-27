@@ -75,8 +75,6 @@ $(".main").onepage_scroll({
     loop: false,
     keyboard: true,
     responsiveFallback: false,
-
-
     direction: "horizontal"
 });
 
