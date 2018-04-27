@@ -11,3 +11,11 @@ $(".drop-icon").click(function () {
     }
     count++;
 })
+
+$('body').bind('touchmove', function(e) { 
+    if($(this).scrollTop() == 0){
+        $(".main").disable();
+    }
+    
+});
+

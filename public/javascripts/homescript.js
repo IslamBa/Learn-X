@@ -1,6 +1,7 @@
 $("body").bind("mousewheel", function () { return false; });
 
 $(".navLink").click(function () {
+    $(".main").enable();
     //OnePage wechsel mit unterer Navigation
     var unterschied = Math.abs($(this).index() - $(".activeLink").index());
 
