@@ -1,5 +1,11 @@
 $("body").bind("mousewheel", function () { return false; });
 
+$("body").bind("mousewheel", function (evt, chg) {
+    this.scrollLeft -= (chg * 50); //need a value to speed up the change
+    evt.preventDefault();
+});
+
+
 $(".navLink").click(function () {
     //OnePage wechsel mit unterer Navigation
     var unterschied = Math.abs($(this).index() - $(".activeLink").index());
