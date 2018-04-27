@@ -7,6 +7,7 @@ $("body").bind("mousewheel", function (evt, chg) {
 
 
 $(".navLink").click(function () {
+    $(".main").enable();
     //OnePage wechsel mit unterer Navigation
     var unterschied = Math.abs($(this).index() - $(".activeLink").index());
 

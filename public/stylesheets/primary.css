@@ -135,3 +135,8 @@ hr {
 .group_col{
 padding-left: 0px;
 }
+
+.anyClass {
+    height:350px;
+    overflow-y: scroll;
+}
