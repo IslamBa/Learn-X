@@ -15,7 +15,6 @@ async function getUsers() {
     let promise = new Promise(resolve => {
         connection.query('SELECT * from benutzer', function (err, rows, fields) {
             if (!err) {
-<<<<<<< HEAD
                 
                 var user = { b_id: rows[i].b_id, name: rows[i].name, passwort: rows[i].passwort };
                     
@@ -37,11 +36,6 @@ async function getloginUsers(obj) {
                     if(obj.name == rows[i].name && obj.passwort == rows[i].passwort){
                         $(".login").attr("href","/home");
                     }
-=======
-                for (var i = 0; i < rows.length; i++) {
-                    var user = { b_id: rows[i].b_id, name: rows[i].name, passwort: rows[i].passwort };
-                    users.push(user);
->>>>>>> 2e21f68b3fb2c27faf3802850982db0edea2d820
                 }
             }
             else

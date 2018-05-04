@@ -16,14 +16,6 @@ router.get('/registrieren', function (req, res, next) {
   res.render('registrieren');
 });
 
-router.get('/benutzer', async function (req, res, next) {
-  try {
-    res.status(200).send(await datenbank.getUsers());
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
-
 router.post('/registrieren/neu', function (req, res, next) {
   try {
     res.status(200).send(datenbank.addUser(req.body));
@@ -32,9 +24,9 @@ router.post('/registrieren/neu', function (req, res, next) {
   }
 });
 
-router.get('/login/neu', function (req, res, next) {
+router.post('/login/neu', function (req, res, next) {
   try {
-    res.status(200).send(datenbank.getloginUsers(req.body));
+    res.status(200).send(datenbank.getloginUser(req.body));
   } catch (error) {
     res.status(400).send(error);
   }
