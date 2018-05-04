@@ -1,4 +1,4 @@
-const { query, nonQuery } = require("./../config/postgresql-common");
+/*const { query, nonQuery } = require("./../config/postgresql-common");
 
 async function getUsers() {
     try {
@@ -19,4 +19,4 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser };
+module.exports = { getUsers, addUser };*/
