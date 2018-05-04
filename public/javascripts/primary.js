@@ -19,3 +19,6 @@ $('body').bind('touchmove', function(e) {
     
 });
 
+$(".group_row").click(function(){
+    $(this).children().eq(1).children().addClass("group_status");s
+})
