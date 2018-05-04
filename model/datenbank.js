@@ -15,28 +15,8 @@ async function getUsers() {
     let promise = new Promise(resolve => {
         connection.query('SELECT * from benutzer', function (err, rows, fields) {
             if (!err) {
-                
                 var user = { b_id: rows[i].b_id, name: rows[i].name, passwort: rows[i].passwort };
-                    
-                
                 resolve(user);
-            }
-            else
-                console.log("Fehler beim Query aufgetreten");
-        });
-    });
-    return await promise;
-}
-
-async function getloginUsers(obj) {
-    let promise = new Promise(resolve => {
-        connection.query('SELECT * from benutzer', function (err, rows, fields) {
-            if (!err) {
-                for(var i = 0; i < rows.length; i++){
-                    if(obj.name == rows[i].name && obj.passwort == rows[i].passwort){
-                        $(".login").attr("href","/home");
-                    }
-                }
             }
             else
                 console.log("Fehler beim Query aufgetreten");
