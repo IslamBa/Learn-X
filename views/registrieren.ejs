@@ -21,11 +21,11 @@
     <div class="container login_daten">
         <form>
             <div class="input-field col s6">
-                <input class='validate' id="name" type="text" class="validate">
+                <input id="regName" class='validate' id="name" type="text" class="validate">
                 <label for="name">NAME</label>
             </div>
             <div class="input-field col s6">
-                <input class='validate' id="password" type="password" class="validate">
+                <input id="regPass" class='validate' id="password" type="password" class="validate">
                 <label for="password">PASSWORT</label>
             </div>
         </form>
@@ -33,7 +33,7 @@
     <div class="container login_buttons text-center">
         <div class="row">
             <div class="col-12">
-                <a href="/login" class="waves-effect waves-light btn-large btn_white">REGISTRIEREN</a>
+                <a class="waves-effect waves-light btn-large btn_white" id="btnReg">REGISTRIEREN</a>
             </div>
             <div class="col-12">
                 <br>
@@ -46,7 +46,7 @@
     <script src="../jquery/dist/jquery.min.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../materialize-css/dist/js/materialize.min.js"></script>
-
+    <script src="../javascripts/login.js"></script>
 </body>
 
 </html>
