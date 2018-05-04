@@ -16,6 +16,14 @@ router.get('/registrieren', function (req, res, next) {
   res.render('registrieren');
 });
 
+router.get('/benutzer', function (req, res, next) {
+  try {
+    res.status(200).send(datenbank.getUsers());
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 router.post('/registrieren/neu', function (req, res, next) {
   try {
     res.status(200).send(datenbank.addUser(req.body));
