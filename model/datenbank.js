@@ -1,22 +1,21 @@
-/*const { query, nonQuery } = require("./../config/postgresql-common");
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    user: "root",
+    host: "localhost",
+    database: "learnx",
+    password: ""
+});
 
-async function getUsers() {
-    try {
-        let result = await query("SELECT * FROM benutzer");
-        console.log(result + " bei funktion getUsers()");
-        return result;
-    }
-    catch (error) {
-        console.log(error);
-    }
+function getUsers() {
+     connection.query('SELECT * from benutzer', function (err, rows, fields) {
+        if (!err){
+            console.log('The solution is: ', JSON.stringify(rows));
+            return "banane";
+        }
+        else
+            console.log('Error while performing Query.');
+    });
+    
 }
 
-async function addUser(obj) {
-    try {
-        await query("INSERT INTO benutzer (name, passwort) VALUES('$1', '$2')", [obj.name, obj.passwort]);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { getUsers, addUser };*/
+module.exports = { getUsers };

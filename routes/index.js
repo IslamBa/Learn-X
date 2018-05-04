@@ -1,13 +1,34 @@
 var express = require('express');
 var router = express.Router();
-var modelDatenbank = require('./../model/datenbank');
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    user: "root",
+    host: "localhost",
+    database: "learnx",
+    password: ""
+});
+
+connection.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+
 
 /* GET home page. */
-/*router.get('/', async function(req, res, next) {
-  res.render('index', { title: 'Express', datenbank : await modelDatenbank.getUsers() });
-});*/
+router.get('/', function(req, res, next) {
+  connection.query('SELECT * from benutzer', function (err, rows, fields) {
+    if (!err){
+        console.log('The solution is: ', rows);
+        var user = {b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort};
+        console.log(user);
+        res.render('index', { title: 'Express', users : user });
+    }
+    else
+        console.log('Error while performing Query.');
+});
 
-
+  
+});
 
 router.get('/login', function(req, res, next) {
   res.render('login');
