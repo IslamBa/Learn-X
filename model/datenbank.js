@@ -12,23 +12,10 @@ connection.connect(function (err) {
 });
 
 async function getUsers() {
-    try {
-        var users = [];
-        let promise = new Promise(resolve => {
-            connection.query('SELECT * from benutzer', function (err, rows, fields) {
-                if (!err) {
-                    for (var i = 0; i < rows.length; i++) {
-                        var user = { b_id: rows[i].b_id, name: rows[i].name, passwort: rows[i].passwort };
-                        users.push(user);
-                    }
-                    resolve(users);
-                }
-                else
-                    console.log("Fehler beim Query aufgetreten");
-            });
     let promise = new Promise(resolve => {
         connection.query('SELECT * from benutzer', function (err, rows, fields) {
             if (!err) {
+
                 
                 var user = { b_id: rows[i].b_id, name: rows[i].name, passwort: rows[i].passwort };
                     
@@ -40,25 +27,6 @@ async function getUsers() {
         });
     });
     return await promise;
-}
-
-async function getloginUsers(obj) {
-    let promise = new Promise(resolve => {
-        connection.query('SELECT * from benutzer', function (err, rows, fields) {
-            if (!err) {
-                for(var i = 0; i < rows.length; i++){
-                    if(obj.name == rows[i].name && obj.passwort == rows[i].passwort){
-                        $(".login").attr("href","/home");
-                    }
-                }
-            }
-            else
-                console.log("Fehler beim Query aufgetreten");
-        });
-        return await promise;
-    } catch (error) {
-        console.log(error);
-    }
 }
 
 async function addUser(obj) {
@@ -91,4 +59,4 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser, getloginUsers };
+module.exports = { getUsers, addUser };
