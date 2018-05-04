@@ -29,4 +29,15 @@ async function getUsers() {
     return await promise;
 }
 
-module.exports = { getUsers };
+function addUser(obj) {
+    var sql = "INSERT INTO benutzer (name, passwort) VALUES ?";
+    var values = [
+        [obj.name, obj.passwort]
+    ];
+    connection.query(sql, [values], function (err, rows, fields) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + rows.affectedRows);
+    });
+}
+
+module.exports = { getUsers, addUser };
