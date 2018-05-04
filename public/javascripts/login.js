@@ -4,7 +4,7 @@ $("#btnReg").click(function(){
     $.ajax({
         url: "/registrieren/neu",
         method: "post",
-        data: { nam: name, pass: passwort},
+        data: { name: name, passwort: passwort},
         success (){
             console.log("neuen Benutzer hinzugefügt");
         },

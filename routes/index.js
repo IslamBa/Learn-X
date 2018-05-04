@@ -17,7 +17,11 @@ router.get('/registrieren', function (req, res, next) {
 });
 
 router.post('/registrieren/neu', function (req, res, next) {
-
+  try {
+    res.status(200).send(datenbank.addUser(req.body));
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 router.get('/home', function (req, res, next) {
