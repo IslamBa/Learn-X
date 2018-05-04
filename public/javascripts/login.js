@@ -13,3 +13,13 @@ $("#btnReg").click(function(){
         }
     });
 });
+
+$(".login").click(function(){
+    $.ajax({
+        method : "get",
+        url : "/login/neu",
+        success(res){
+
+        }
+    })
+})

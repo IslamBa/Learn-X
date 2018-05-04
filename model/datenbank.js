@@ -12,11 +12,15 @@ connection.connect(function (err) {
 });
 
 async function getUsers() {
+    var users = [];
     let promise = new Promise(resolve => {
         connection.query('SELECT * from benutzer', function (err, rows, fields) {
             if (!err) {
-                var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
-                resolve(user);
+                for(var i = 0; i < rows.length; i++){
+                var user = { b_id: rows[i].b_id, name: rows[i].name, passwort: rows[i].passwort };
+                    users.push(user);
+                }
+                resolve(users);
             }
             else
                 console.log("Fehler beim Query aufgetreten");
