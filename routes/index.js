@@ -24,9 +24,9 @@ router.get('/benutzer', async function (req, res, next) {
   }
 });
 
-router.post('/registrieren/neu', function (req, res, next) {
+router.post('/registrieren/neu', async function (req, res, next) {
   try {
-    res.status(200).send(datenbank.addUser(req.body));
+    res.status(200).send(await datenbank.addUser(req.body) + "Hier gehts");
   } catch (error) {
     res.status(400).send(error);
   }

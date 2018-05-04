@@ -7,23 +7,25 @@ $("#btnReg").click(function () {
         url: "/benutzer",
         success(res) {
             console.log(res);
+            $.ajax({
+                url: "/registrieren/neu",
+                method: "post",
+                data: { name: name, passwort: passwort },
+                success(res) {
+                    console.log("neuen Benutzer hinzugefügt");
+                },
+                error(err) {
+                    alert(err.responseText);
+                    console.log(err.responseText);
+                }
+            });
         },
         error(err) {
-            console.log(err);
+            console.log(err.responseText);
         }
     });
 
-    $.ajax({
-        url: "/registrieren/neu",
-        method: "post",
-        data: { name: name, passwort: passwort },
-        success() {
-            console.log("neuen Benutzer hinzugefügt");
-        },
-        error(err) {
-            console.log(err);
-        }
-    });
+
 });
 
 $(".login").click(function () {
