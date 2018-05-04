@@ -1,25 +1,40 @@
-$("#btnReg").click(function(){
+$("#btnReg").click(function () {
     var name = $("#regName").val();
     var passwort = $("#regPass").val();
+
+    $.ajax({
+        method: "get",
+        url: "/benutzer",
+        success(res) {
+            console.log(res);
+        },
+        error(err) {
+            console.log(err);
+        }
+    });
+
     $.ajax({
         url: "/registrieren/neu",
         method: "post",
-        data: { name: name, passwort: passwort},
-        success (){
+        data: { name: name, passwort: passwort },
+        success() {
             console.log("neuen Benutzer hinzugefügt");
         },
-        error(err){
+        error(err) {
             console.log(err);
         }
     });
 });
 
-$(".login").click(function(){
+$(".login").click(function () {
     $.ajax({
-        method : "get",
-        url : "/login/neu",
-        success(res){
-
+        method: "get",
+        url: "/benutzer",
+        success(res) {
+            console.log(res);
+        },
+        error(err) {
+            console.log(err);
         }
-    })
+    });
 })

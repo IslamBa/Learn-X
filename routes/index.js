@@ -16,9 +16,9 @@ router.get('/registrieren', function (req, res, next) {
   res.render('registrieren');
 });
 
-router.get('/benutzer', function (req, res, next) {
+router.get('/benutzer', async function (req, res, next) {
   try {
-    res.status(200).send(datenbank.getUsers());
+    res.status(200).send(await datenbank.getUsers());
   } catch (error) {
     res.status(400).send(error);
   }
