@@ -24,11 +24,11 @@ router.get('/benutzer', async function (req, res, next) {
   }
 });
 
-router.get('/benutzer/:name', async function (req, res, next) {
+router.post('/benutzer/:name', async function (req, res, next) {
   try {
-    res.status(200).send(await datenbank.getUser(req.params.name));
+    res.status(200).send(await datenbank.getUser(req.body));
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send("Benutername nicht bekannt");
   }
 });
 

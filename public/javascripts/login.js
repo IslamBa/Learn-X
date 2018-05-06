@@ -33,17 +33,27 @@ $(".login").click(function () {
     let passwort = $("#password").val();
 
     $.ajax({
-        method: "get",
+        method: "post",
         url: "/benutzer/" + name,
         data: {
             name: name,
             passwort: passwort
         },
         success(res) {
-            $(this).attr("href", "/home");
+            if(res == true){
+                window.location.href = "/home";
+            }
+            else if(res == false){
+                alert("Benutzername und passwort stimmen nicht überein");
+            }
+            else{
+                alert("Benutzername nicht bekannt");
+            }
+            
         },
         error(err){
-            console.log(err);
+            console.log(err.responseText);
+            alert(err.responseText);
         }
     });
 })

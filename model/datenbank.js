@@ -29,25 +29,32 @@ async function getUsers() {
     return await promise;
 }
 
-async function getUser(name) {
+async function getUser(obj) {
     try {
         let promise = new Promise(resolve => {
-            connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', [name], function (err, rows, fields) {
-                if (!err) {
+            connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', [obj.name], function (err, rows, fields) {
+                if (!err && rows.length > 0) {
                     var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
                     console.log(user);
-                    resolve(user);
+                    if (user.name == obj.name && user.passwort == obj.passwort) {
+                        resolve(true);
+                    }
+                    else {
+                        //throw "Name und Passwort stimmen nicht überein";
+                        resolve(false);
+                    }
                 }
-                else
-                    console.log("Fehler beim Query aufgetreten");
+                else {
+                    resolve("pech");
+                }
             });
         });
         return await promise;
     }
     catch (error) {
+        console.log(error);
         throw error;
     }
-
 }
 
 async function addUser(obj) {
