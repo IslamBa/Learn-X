@@ -14,10 +14,10 @@ connection.connect(function (err) {
 async function getUsers() {
     let promise = new Promise(resolve => {
         connection.query('SELECT * from benutzer', function (err, rows, fields) {
-            if (!err) {  
+            if (!err) {
                 var users = [];
-                for(let el of rows){
-                    users.push({b_id: el.b_id, name: el.name, passwort: el.passwort})
+                for (let el of rows) {
+                    users.push({ b_id: el.b_id, name: el.name, passwort: el.passwort })
                 }
                 //var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
                 resolve(users);
@@ -29,11 +29,32 @@ async function getUsers() {
     return await promise;
 }
 
+async function getUser(name) {
+    try {
+        let promise = new Promise(resolve => {
+            connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', [name], function (err, rows, fields) {
+                if (!err) {
+                    var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
+                    console.log(user);
+                    resolve(user);
+                }
+                else
+                    console.log("Fehler beim Query aufgetreten");
+            });
+        });
+        return await promise;
+    }
+    catch (error) {
+        throw error;
+    }
+
+}
+
 async function addUser(obj) {
     try {
         var user = await getUsers();
         var gleicherName = false;
-    
+
         user.forEach(element => {
             if (element.name == obj.name) {
                 console.log("gleicher NAME");
@@ -59,4 +80,4 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser };
+module.exports = { getUsers, addUser, getUser };

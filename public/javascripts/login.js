@@ -29,13 +29,21 @@ $("#btnReg").click(function () {
 });
 
 $(".login").click(function () {
+    let name = $("#name").val();
+    let passwort = $("#password").val();
+
     $.ajax({
-        method : "get",
-        url : "/login/neu",
-        data : { name : $("#name").val(),
-                 passwort : $("#password").val()},
-        success(res){
-            $(this).attr("href","/home");
+        method: "get",
+        url: "/benutzer/" + name,
+        data: {
+            name: name,
+            passwort: passwort
+        },
+        success(res) {
+            $(this).attr("href", "/home");
+        },
+        error(err){
+            console.log(err);
         }
     });
 })
