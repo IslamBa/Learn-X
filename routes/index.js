@@ -16,21 +16,37 @@ router.get('/registrieren', function (req, res, next) {
   res.render('registrieren');
 });
 
-router.post('/registrieren/neu', function (req, res, next) {
+router.get('/benutzer', async function (req, res, next) {
   try {
-    res.status(200).send(datenbank.addUser(req.body));
+    res.status(200).send(await datenbank.getUsers());
   } catch (error) {
     res.status(400).send(error);
   }
 });
 
-router.post('/login/neu', function (req, res, next) {
+router.post('/benutzer/:name', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.getUser(req.body));
+  } catch (error) {
+    res.status(400).send("Benutername nicht bekannt");
+  }
+});
+
+router.post('/registrieren/neu', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.addUser(req.body) + "Hier gehts");
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+/*router.get('/login/neu', function (req, res, next) {
   try {
     res.status(200).send(datenbank.getloginUser(req.body));
   } catch (error) {
     res.status(400).send(error);
   }
-});
+});*/
 
 router.get('/home', function (req, res, next) {
   res.render('home');
