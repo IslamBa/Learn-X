@@ -35,7 +35,7 @@
         </section>
         <section>
             <div class="container text-center">
-                <button class="waves-effect waves-light btn-large btn_white">Neue Gruppe</button>
+                <button id="btn_newGroup" class="waves-effect waves-light btn-large btn_white" data-toggle="modal" data-target="#newGroupModal">Neue Gruppe</button>
                 <br>
                 <br>
                 <hr>
@@ -121,11 +121,11 @@
                         </div>
                         <div class="col-2 group_col">
                             <div>
-s
+                                s
                             </div>
                         </div>
                     </div>
-                  </div>
+                </div>
             </div>
         </section>
         <section>
@@ -135,7 +135,7 @@ s
                 <br>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                            Was ist die Hauptstadt von Österreich?
+                        Was ist die Hauptstadt von Österreich?
                         <i class="material-icons right">create</i>
                         <hr>
                     </div>
@@ -173,12 +173,15 @@ s
         </section>
         <section>
             <div class="container text-center">
-                <p class="text-oben">Name</p>
+                <p class="text-oben">USER ID</p>
+                <p id="b_id">
+                    <%= benutzer.b_id%>
+                </p>
+                <p class="text-oben">GROUP NAME</p>
                 <p>Lernen Vokabel du weist</p>
-                <p class="text-oben">ID</p>
-                <p id="b_id">#23673567</p>
-                <p class="text-oben">Member</p>
-
+                <p class="text-oben">GROUP ID</p>
+                <p>32</p>
+                <p class="text-oben">MEMBER</p>
                 <i class="small material-icons">accessibility</i>
                 <p>10</p>
 
@@ -207,6 +210,28 @@ s
             </div>
         </div>
     </div>
+
+    <!--MODAL FÜR NEUE GRUPPE-->
+    <div class="modal fade" id="newGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Neue Gruppe</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <label>Name der neuen Gruppe</label>
+                  <input id="new_groupName">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
     <script src="../jquery/dist/jquery.min.js"></script>

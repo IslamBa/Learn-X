@@ -60,7 +60,7 @@ $(".navLink").click(function () {
         $(this).children("i").remove();
         $(this).append("Info");
     }
-})
+});
 
 $(".main").onepage_scroll({
     sectionContainer: "section",
@@ -77,5 +77,9 @@ $(".main").onepage_scroll({
     keyboard: true,
     responsiveFallback: false,
     direction: "horizontal"
+});
+
+$("#btn_newGroup").click(function(){
+    
 });
 

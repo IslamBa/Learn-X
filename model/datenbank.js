@@ -79,6 +79,39 @@ async function getUser(name) {
     }
 }
 
+async function getUserGroups(name) {
+    try {
+        let promise = new Promise(resolve => {
+            connection.query('SELECT * FROM benutzer JOIN benutzer_liste USING(b_id) JOIN liste USING(l_id) JOIN inhalt USING(l_id) WHERE BINARY name = ?', name, function (err, rows, fields) {
+                if (!err) {
+                    var userGroup = [];
+                    rows.forEach(element => {
+                        userGroup.push({
+                            b_id: element.b_id,
+                            name: element.name,
+                            l_id: element.l_id,
+                            g_name: element.g_name,
+                            frage : element.frage,
+                            antwort: element.antwort,
+                            pers_anz: element.pers_anz
+                        })
+                        console.log(element);
+                    });
+                    resolve(userGroup);
+                }
+                else {
+                    throw err;
+                }
+            });
+        });
+        return await promise;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 async function addUser(obj) {
     try {
         var user = await getUsers();
@@ -109,4 +142,4 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser, getUser, loginCheck };
+module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups };
