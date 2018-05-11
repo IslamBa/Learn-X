@@ -15,7 +15,7 @@ async function getUsers() {
     let promise = new Promise(resolve => {
         connection.query('SELECT * from benutzer', function (err, rows, fields) {
             if (!err) {
-                var user = { b_id: rows[i].b_id, name: rows[i].name, passwort: rows[i].passwort };
+                var user = { b_id: rows.b_id, name: rows.name, passwort: rows.passwort };
                 resolve(user);
             }
             else
@@ -50,4 +50,4 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser, getloginUsers };
+module.exports = { getUsers, addUser };
