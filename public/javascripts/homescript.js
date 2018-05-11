@@ -135,16 +135,28 @@ getGroups();
 $(".anyClass").on("click",".group_name",function(){
     let g_id = $(this).attr("id");
     let g_name = $(this).text();
-    let g_anz = $(this).closest(".anzahl").text();
     $("#groupID").text(g_id);
     $("#groupName").text(g_name);
-    $("#groupCount").text(g_anz);
     $.ajax({
         method:"get",
         url:"/content/"+g_id,
         success(res){
             console.log(res);
-            
+            $(".Fragen").empty();
+            $(".Fragen").append('<i class="medium material-icons">add_circle</i>');
+            if(res.length > 0){
+                $("#groupCount").text(res[0].pers_anz);
+                res.forEach(element => {
+                    let fragen = `<div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        `+element.frage+`
+                        <i class="material-icons right">create</i>
+                        <hr>
+                    </div>
+                    </div>`
+                    $(".Fragen").append(fragen);
+                });
+            }
         },
         error(err){
             console.log(err);
