@@ -151,7 +151,7 @@ padding-left: 0px;
     z-index: 9999;
     }
     /* Inner */
-    .popup-inner {
+.popup-inner {
     max-width:700px;
     width:90%;
     padding:40px;
@@ -165,7 +165,7 @@ padding-left: 0px;
     background:#fff;
     }
     /* Close Button */
-    .popup-close {
+.popup-close {
     width:30px;
     height:30px;
     padding-top:4px;
@@ -184,10 +184,14 @@ padding-left: 0px;
     line-height:100%;
     color:#fff;
     }
-    .popup-close:hover {
+.popup-close:hover {
     -webkit-transform:translate(50%, -50%) rotate(180deg);
     transform:translate(50%, -50%) rotate(180deg);
     background:rgba(0,0,0,1);
     text-decoration:none;
     }
 
+
+#new_groupName{
+    color:black;
+}
