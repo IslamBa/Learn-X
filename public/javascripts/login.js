@@ -34,14 +34,14 @@ $(".login").click(function () {
 
     $.ajax({
         method: "post",
-        url: "/benutzer/" + name,
+        url: "/benutzer",
         data: {
             name: name,
             passwort: passwort
         },
         success(res) {
-            if(res == true){
-                window.location.href = "/home";
+            if(typeof res == "object"){
+                window.location.href = "/home/"+name;
             }
             else if(res == false){
                 alert("Benutzername und passwort stimmen nicht überein");
@@ -49,7 +49,6 @@ $(".login").click(function () {
             else{
                 alert("Benutzername nicht bekannt");
             }
-            
         },
         error(err){
             console.log(err.responseText);
@@ -57,3 +56,17 @@ $(".login").click(function () {
         }
     });
 })
+
+function Benutzer(name){
+    $.ajax({
+        method:"get",
+        url:"/benutzer/"+name,
+        success(res){
+            console.log(res);
+            return res;
+        },
+        error(err){
+            console.log(err);
+        }
+    });
+}

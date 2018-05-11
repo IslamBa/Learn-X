@@ -29,7 +29,7 @@ async function getUsers() {
     return await promise;
 }
 
-async function getUser(obj) {
+async function loginCheck(obj) {
     try {
         let promise = new Promise(resolve => {
             connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', [obj.name], function (err, rows, fields) {
@@ -37,7 +37,7 @@ async function getUser(obj) {
                     var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
                     console.log(user);
                     if (user.name == obj.name && user.passwort == obj.passwort) {
-                        resolve(true);
+                        resolve(user);
                     }
                     else {
                         //throw "Name und Passwort stimmen nicht überein";
@@ -46,6 +46,28 @@ async function getUser(obj) {
                 }
                 else {
                     resolve("pech");
+                }
+            });
+        });
+        return await promise;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function getUser(name) {
+    try {
+        let promise = new Promise(resolve => {
+            connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', name, function (err, rows, fields) {
+                if (!err) {
+                    var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
+                    console.log(user);
+                    resolve(user);
+                }
+                else {
+                    throw err;
                 }
             });
         });
@@ -87,4 +109,4 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser, getUser };
+module.exports = { getUsers, addUser, getUser, loginCheck };
