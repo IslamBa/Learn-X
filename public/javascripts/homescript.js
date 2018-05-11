@@ -112,7 +112,8 @@ function getGroups() {
                 <div class="col-10" align="left">
                     <h4 id="`+element.l_id+`" class="group_name">
                        `+element.g_name+`
-                    </h4>s
+                    </h4>
+                    <span class="anzahl" style="display:none;">`+element.pers_anz+`</span>
                 </div>
                 <div class="col-2 group_col">
                     <div>
@@ -134,14 +135,16 @@ getGroups();
 $(".anyClass").on("click",".group_name",function(){
     let g_id = $(this).attr("id");
     let g_name = $(this).text();
+    let g_anz = $(this).closest(".anzahl").text();
     $("#groupID").text(g_id);
     $("#groupName").text(g_name);
+    $("#groupCount").text(g_anz);
     $.ajax({
         method:"get",
         url:"/content/"+g_id,
         success(res){
             console.log(res);
-            $("#groupCount").text(res[0].pers_anz);
+            
         },
         error(err){
             console.log(err);
