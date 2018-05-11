@@ -28,6 +28,6 @@ $("#btnReg").click(function () {
 
 $(document).keypress(function(event) {
     if (event.keyCode == 13) {
-        $(".registrieren").click();
+        $('#btnReg').click();
     }
 });
