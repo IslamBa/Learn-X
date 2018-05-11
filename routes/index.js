@@ -36,6 +36,15 @@ router.get('/groups/:b_id', async function (req, res, next) {
   }
 });
 
+//Holt den Inhalt einer Gruppe
+router.get('/content/:b_id', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.getContent(req.params.b_id));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 router.get('/benutzer/:name', async function (req, res, next) {
   try {
     res.status(200).send(await datenbank.getUser(req.params.name));

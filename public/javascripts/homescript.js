@@ -109,10 +109,9 @@ function getGroups() {
                 let htmlString = 
                 `<div class="row group_row">
                 <div class="col-10" align="left">
-                    <h4 class="group_name">
+                    <h4 id="`+element.l_id+`" class="group_name">
                        `+element.g_name+`
-                    </h4>
-                    <p class="g_id" style="display:none;">`+element.l_id+`</p>
+                    </h4>s
                 </div>
                 <div class="col-2 group_col">
                     <div>
@@ -130,4 +129,22 @@ function getGroups() {
 };
 
 getGroups();
+
+$(".anyClass").on("click",".group_name",function(){
+    let g_id = $(this).attr("id");
+    let g_name = $(this).text();
+    $("#groupID").text(g_id);
+    $("#groupName").text(g_name);
+    $.ajax({
+        method:"get",
+        url:"/content/"+g_id,
+        success(res){
+            console.log(res);
+            $("#groupCount").text(res[0].pers_anz);
+        },
+        error(err){
+            console.log(err);
+        }
+    })
+});
 

@@ -171,4 +171,39 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup };
+async function getContent(g_id) {
+    try {
+        let promise = new Promise(resolve => {
+            connection.query('SELECT * FROM liste JOIN inhalt USING(l_id) WHERE l_id = ?', g_id, function (err, rows, fields) {
+                if (!err) {
+                    var content = [];
+                    rows.forEach(element => {
+                        content.push({
+                            l_id: element.l_id,
+                            g_name: element.g_name,
+                            pers_anz: element.pers_anz,
+                            f_id: element.f_id,
+                            frage: element.frage,
+                            antwort: element.antwort
+                        })
+                        console.log(element);
+                    });
+                    resolve(content);
+                }
+                else if(rows.length < 0){
+                    resolve(false);
+                }
+                else {
+                    throw err;
+                }
+            });
+        });
+        return await promise;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup, getContent };
