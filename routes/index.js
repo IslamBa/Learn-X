@@ -28,6 +28,14 @@ router.get('/benutzer', async function (req, res, next) {
   }
 });
 
+router.get('/groups/:b_id', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.getUserGroups(req.params.b_id));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 router.get('/benutzer/:name', async function (req, res, next) {
   try {
     res.status(200).send(await datenbank.getUser(req.params.name));
@@ -46,15 +54,20 @@ router.post('/benutzer', async function (req, res, next) {
 
 router.post('/registrieren/neu', async function (req, res, next) {
   try {
-    res.status(200).send(await datenbank.addUser(req.body) + "Hier gehts");
+    res.status(200).send(await datenbank.addUser(req.body));
   } catch (error) {
     res.status(400).send(error);
   }
 });
 
-router.get('/fragen', function (req, res) {
-  res.render('fragen')
+router.post('/groups', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.addGroup(req.body));
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
+
 
 router.get('/impressum', function (req, res) {
   res.render('impressum')

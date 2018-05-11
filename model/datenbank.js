@@ -79,10 +79,10 @@ async function getUser(name) {
     }
 }
 
-async function getUserGroups(name) {
+async function getUserGroups(id) {
     try {
         let promise = new Promise(resolve => {
-            connection.query('SELECT * FROM benutzer JOIN benutzer_liste USING(b_id) JOIN liste USING(l_id) JOIN inhalt USING(l_id) WHERE BINARY name = ?', name, function (err, rows, fields) {
+            connection.query('SELECT * FROM benutzer JOIN benutzer_liste USING(b_id) JOIN liste USING(l_id) WHERE b_id = ? GROUP BY g_name', id, function (err, rows, fields) {
                 if (!err) {
                     var userGroup = [];
                     rows.forEach(element => {
@@ -91,13 +91,14 @@ async function getUserGroups(name) {
                             name: element.name,
                             l_id: element.l_id,
                             g_name: element.g_name,
-                            frage : element.frage,
-                            antwort: element.antwort,
                             pers_anz: element.pers_anz
                         })
                         console.log(element);
                     });
                     resolve(userGroup);
+                }
+                else if(rows.length < 0){
+                    resolve(false);
                 }
                 else {
                     throw err;
@@ -105,6 +106,34 @@ async function getUserGroups(name) {
             });
         });
         return await promise;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function addGroup(obj) {
+    try {
+        //var g_id;
+        connection.query('INSERT INTO liste (g_name, pers_anz) VALUES (?,1)', [obj.g_name], function (err, rows, fields) {
+            if (!err) {
+                console.log("Neue Gruppe hinzugefügt");
+                console.log("letzze id" + rows.insertId);
+                connection.query('INSERT INTO benutzer_liste (b_id, l_id) VALUES(?,?)', [obj.b_id, rows.insertId], function (err, rows, fields) {
+                    if (!err) {
+                        console.log("Neue Gruppe hinzugefügt");
+                    }
+                    else {
+                        throw err;
+                    }
+                });
+            }
+            else {
+                throw err;
+            }
+        });
+        
     }
     catch (error) {
         console.log(error);
@@ -142,4 +171,4 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups };
+module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup };

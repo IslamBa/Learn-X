@@ -45,86 +45,7 @@
                 <br>
                 <hr>
                 <div class="anyClass container-fluid text-center">
-                    <div class="row group_row">
-                        <div class="col-10" align="left">
-                            <h4 class="group_name">Group 1</h4>
-                        </div>
-                        <div class="col-2 group_col">
-                            <div>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row group_row">
-                        <div class="col-10" align="left">
-                            <h4 class="group_name">Group 2</h4>
-                        </div>
-                        <div class="col-2 group_col">
-                            <div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row group_row">
-                        <div class="col-10" align="left">
-                            <h4 class="group_name">Group 3</h4>
-                        </div>
-                        <div class="col-2 group_col">
-                            <div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row group_row">
-                        <div class="col-10" align="left">
-                            <h4 class="group_name">Group 3</h4>
-                        </div>
-                        <div class="col-2 group_col">
-                            <div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row group_row">
-                        <div class="col-10" align="left">
-                            <h4 class="group_name">Group 3</h4>
-                        </div>
-                        <div class="col-2 group_col">
-                            <div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row group_row">
-                        <div class="col-10" align="left">
-                            <h4 class="group_name">Group 3</h4>
-                        </div>
-                        <div class="col-2 group_col">
-                            <div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row group_row">
-                        <div class="col-10" align="left">
-                            <h4 class="group_name">Group 3</h4>
-                        </div>
-                        <div class="col-2 group_col">
-                            <div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row group_row">
-                        <div class="col-10" align="left">
-                            <h4 class="group_name">Group 3</h4>
-                        </div>
-                        <div class="col-2 group_col">
-                            <div>
-                                s
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -174,7 +95,7 @@
         <section>
             <div class="container text-center">
                 <p class="text-oben">USER ID</p>
-                <p id="b_id">
+                <p class="b_id" id="<%=benutzer.b_id%>">
                     <%= benutzer.b_id%>
                 </p>
                 <p class="text-oben">GROUP NAME</p>
@@ -213,25 +134,25 @@
 
     <!--MODAL FÜR NEUE GRUPPE-->
     <div class="modal fade" id="newGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Neue Gruppe</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                    <h5 class="modal-title" id="exampleModalLabel">Neue Gruppe</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                  <label>Name der neuen Gruppe</label>
-                  <input id="new_groupName">
+                    <label>Name der neuen Gruppe</label>
+                    <input id="new_groupName">
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary addGroup">Save changes</button>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
+    </div>
 
 
     <script src="../jquery/dist/jquery.min.js"></script>
