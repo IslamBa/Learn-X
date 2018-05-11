@@ -14,7 +14,7 @@ $(".login").click(function () {
                 window.location.href = "/home/"+name;
             }
             else if(res == false){
-                alert("Benutzername und passwort stimmen nicht überein");
+                alert("Benutzername und passwort Stimmen nicht überein");
             }
             else{
                 alert("Benutzername nicht bekannt");
