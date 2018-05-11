@@ -61,7 +61,7 @@ $(".navLink").click(function () {
         $(this).children("i").remove();
         $(this).append("Info");
     }
-})
+});
 
 $(".main").onepage_scroll({
     sectionContainer: "section",
@@ -79,4 +79,56 @@ $(".main").onepage_scroll({
     responsiveFallback: false,
     direction: "horizontal"
 });
+
+$(".addGroup").click(function () {
+    let g_name = $("#new_groupName").val();
+    let b_id = $(".b_id").attr("id");
+    $.ajax({
+        method: "post",
+        url: "/groups",
+        data: {
+            g_name: g_name,
+            b_id: b_id
+        },
+        success(res) {
+            alert("Neue Gruppe hinzugefügt")
+        },
+        error(err) {
+            console.log(err);
+        }
+    });
+});
+
+function getGroups() {
+    let b_id = $(".b_id").attr("id");
+    $.ajax({
+        method: "get",
+        url: "/groups/" + b_id,
+        success(res) {
+            console.log("gruppen bekommen");
+            res.forEach(element => {
+                let htmlString = 
+                `<div class="row group_row">
+                <div class="col-10" align="left">
+                    <h4 class="group_name">
+                       `+element.g_name+`
+                    </h4>
+                    <p class="g_id" style="display:none;">`+element.l_id+`</p>
+                </div>
+                <div class="col-2 group_col">
+                    <div>
+            
+                    </div>
+                </div>
+                </div>`;
+                $(".anyClass").append(htmlString);
+            });
+        },
+        error(err) {
+            console.log(err);
+        }
+    });
+};
+
+getGroups();
 

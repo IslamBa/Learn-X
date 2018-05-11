@@ -8,5 +8,8 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <p><%= users.name%></p>
+    <% for(let el of users){%>
+      <p><%= el.frage%></p>
+      <%}%>
   </body>
 </html>

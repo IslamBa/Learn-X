@@ -29,7 +29,7 @@ async function getUsers() {
     return await promise;
 }
 
-async function getUser(obj) {
+async function loginCheck(obj) {
     try {
         let promise = new Promise(resolve => {
             connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', [obj.name], function (err, rows, fields) {
@@ -37,7 +37,7 @@ async function getUser(obj) {
                     var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
                     console.log(user);
                     if (user.name == obj.name && user.passwort == obj.passwort) {
-                        resolve(true);
+                        resolve(user);
                     }
                     else {
                         //throw "Name und Passwort stimmen nicht überein";
@@ -50,6 +50,90 @@ async function getUser(obj) {
             });
         });
         return await promise;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function getUser(name) {
+    try {
+        let promise = new Promise(resolve => {
+            connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', name, function (err, rows, fields) {
+                if (!err) {
+                    var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
+                    console.log(user);
+                    resolve(user);
+                }
+                else {
+                    throw err;
+                }
+            });
+        });
+        return await promise;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function getUserGroups(id) {
+    try {
+        let promise = new Promise(resolve => {
+            connection.query('SELECT * FROM benutzer JOIN benutzer_liste USING(b_id) JOIN liste USING(l_id) WHERE b_id = ? GROUP BY g_name', id, function (err, rows, fields) {
+                if (!err) {
+                    var userGroup = [];
+                    rows.forEach(element => {
+                        userGroup.push({
+                            b_id: element.b_id,
+                            name: element.name,
+                            l_id: element.l_id,
+                            g_name: element.g_name,
+                            pers_anz: element.pers_anz
+                        })
+                        console.log(element);
+                    });
+                    resolve(userGroup);
+                }
+                else if(rows.length < 0){
+                    resolve(false);
+                }
+                else {
+                    throw err;
+                }
+            });
+        });
+        return await promise;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function addGroup(obj) {
+    try {
+        //var g_id;
+        connection.query('INSERT INTO liste (g_name, pers_anz) VALUES (?,1)', [obj.g_name], function (err, rows, fields) {
+            if (!err) {
+                console.log("Neue Gruppe hinzugefügt");
+                console.log("letzze id" + rows.insertId);
+                connection.query('INSERT INTO benutzer_liste (b_id, l_id) VALUES(?,?)', [obj.b_id, rows.insertId], function (err, rows, fields) {
+                    if (!err) {
+                        console.log("Neue Gruppe hinzugefügt");
+                    }
+                    else {
+                        throw err;
+                    }
+                });
+            }
+            else {
+                throw err;
+            }
+        });
+        
     }
     catch (error) {
         console.log(error);
@@ -87,4 +171,4 @@ async function addUser(obj) {
     }
 }
 
-module.exports = { getUsers, addUser, getUser };
+module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup };

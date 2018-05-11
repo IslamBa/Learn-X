@@ -5,7 +5,7 @@ var datenbank = require("../model/datenbank");
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
-  res.render('index', { title: 'Express', users: await datenbank.getUsers() });
+  res.render('index', { title: 'Express', users: await datenbank.getUserGroups('islam') });
 });
 
 router.get('/login', function (req, res, next) {
@@ -16,6 +16,10 @@ router.get('/registrieren', function (req, res, next) {
   res.render('registrieren');
 });
 
+router.get('/home/:name', async function (req, res, next) {
+  res.render('home', {benutzer: await datenbank.getUser(req.params.name) });
+});
+
 router.get('/benutzer', async function (req, res, next) {
   try {
     res.status(200).send(await datenbank.getUsers());
@@ -24,9 +28,25 @@ router.get('/benutzer', async function (req, res, next) {
   }
 });
 
-router.post('/benutzer/:name', async function (req, res, next) {
+router.get('/groups/:b_id', async function (req, res, next) {
   try {
-    res.status(200).send(await datenbank.getUser(req.body));
+    res.status(200).send(await datenbank.getUserGroups(req.params.b_id));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.get('/benutzer/:name', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.getUser(req.params.name));
+  } catch (error) {
+    res.status(400).send("Benutername nicht bekannt");
+  }
+});
+
+router.post('/benutzer', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.loginCheck(req.body));
   } catch (error) {
     res.status(400).send("Benutername nicht bekannt");
   }
@@ -34,27 +54,20 @@ router.post('/benutzer/:name', async function (req, res, next) {
 
 router.post('/registrieren/neu', async function (req, res, next) {
   try {
-    res.status(200).send(await datenbank.addUser(req.body) + "Hier gehts");
+    res.status(200).send(await datenbank.addUser(req.body));
   } catch (error) {
     res.status(400).send(error);
   }
 });
 
-/*router.get('/login/neu', function (req, res, next) {
+router.post('/groups', async function (req, res, next) {
   try {
-    res.status(200).send(datenbank.getloginUser(req.body));
+    res.status(200).send(await datenbank.addGroup(req.body));
   } catch (error) {
     res.status(400).send(error);
   }
-});*/
-
-router.get('/home', function (req, res, next) {
-  res.render('home');
 });
 
-router.get('/fragen', function (req, res) {
-  res.render('fragen')
-});
 
 router.get('/impressum', function (req, res) {
   res.render('impressum')
