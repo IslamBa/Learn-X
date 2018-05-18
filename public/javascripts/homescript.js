@@ -116,7 +116,7 @@ function getGroups() {
                     <span class="anzahl" style="display:none;">`+ element.pers_anz + `</span>
                 </div>
                 <div class="col-2 group_col">
-                    <div>
+                    <div class="status">
             
                     </div>
                 </div>
@@ -129,6 +129,21 @@ function getGroups() {
         }
     });
 };
+
+$(".anyClass").on("click",".group_row",function(){
+    
+    for(var i = 0; i <= $(".group_row").length; i++){
+        if($(".group_row").eq(i).hasClass("border_row")){
+            $(".group_row").eq(i).removeClass("border_row")
+        }
+        else{
+            $(this).addClass("border_row");
+        }
+    }
+   
+})
+
+
 
 getGroups();
 
@@ -168,7 +183,9 @@ $(".anyClass").on("click", ".group_name", function () {
             console.log(err);
         }
     })
+
 });
+
 
 $("#btnRandom").click(function () {
     if ($("#groupID").text() == "-") alert("Bitte Gruppe auswählen");
