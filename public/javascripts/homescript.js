@@ -92,6 +92,7 @@ $(".addGroup").click(function () {
         },
         success(res) {
             alert("Neue Gruppe hinzugefügt")
+            getGroups();
         },
         error(err) {
             console.log(err);
@@ -106,6 +107,7 @@ function getGroups() {
         url: "/groups/" + b_id,
         success(res) {
             console.log("gruppen bekommen");
+            $(".anyClass").empty();
             res.forEach(element => {
                 let htmlString =
                     `<div class="row group_row">
@@ -153,7 +155,7 @@ $(".anyClass").on("click", ".group_name", function () {
                 $("#groupCount").text(res[0].pers_anz);
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
-                    <div value="`+element.f_id+`" class="col-lg-12 col-md-12 col-sm-12 frage">
+                    <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
                         `+ element.frage + `
                         <i class="material-icons right">create</i>
                         <hr>
@@ -192,18 +194,19 @@ $("#btnRandom").click(function () {
 })
 
 $(".joinGroup").click(function () {
-    let g_id = $(".gruppe").attr("id");
+    let g_id = $("#join_groupName").val();
     let b_id = $(".b_id").attr("id");
     $.ajax({
         url: "/groups/" + g_id,
         method: "put",
-        data : {
+        data: {
             b_id: b_id,
             g_id: g_id
         },
         success(res) {
             console.log("Gruppe gejoint" + res);
             alert("Gruppe beigetreten");
+            getGroups();
         },
         error(err) {
             console.log(err);
@@ -211,28 +214,59 @@ $(".joinGroup").click(function () {
     });
 });
 
-$(".addInhalt").click(function(){
+$(".addInhalt").click(function () {
     let frage = $("#newFrage").val();
     let antwort = $("#newAntwort").val();
     let g_id = $(".gruppe").attr("id");
-    // alert(frage + " " + antwort + " " + g_id);
+    if (g_id == undefined) { alert("Bitte Gruppe auswählen"); }
+    else {
+        $.ajax({
+            url: "/content/" + g_id,
+            method: "post",
+            data: {
+                frage: frage,
+                antwort: antwort,
+                g_id: g_id
+            },
+            success(res) {
+                alert("Inhalt hinzugefügt");
+                getContent();
+                console.log("Inhalt hinzugefügt");
+            },
+            error(err) {
+                console.log(err);
+            }
+        })
+    }
+});
+
+function getContent(){
+    let g_id = $(".gruppe").attr("id");
     $.ajax({
-        url:"/content/"+g_id,
-        method:"post",
-        data:{
-            frage: frage,
-            antwort: antwort,
-            g_id: g_id
+        method: "get",
+        url: "/content/" + g_id,
+        success(res) {
+            console.log(res);
+            if (res.length > 0) {
+                $(".frg").remove();
+                res.forEach(element => {
+                    let fragen = `<div class="row frg">
+                    <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
+                        `+ element.frage + `
+                        <i class="material-icons right">create</i>
+                        <hr>
+                    </div>
+                    </div>`
+                    $(".Fragen").append(fragen);
+                });
+            }
         },
-        success(res){
-            alert("Inhalt hinzugefügt")
-            console.log("Inhalt hinzugefügt");
-        },
-        error(err){
+        error(err) {
             console.log(err);
         }
     })
-});
+}
+
 
 
 
