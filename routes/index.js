@@ -36,6 +36,14 @@ router.get('/groups/:b_id', async function (req, res, next) {
   }
 });
 
+router.get('/group/:b_id', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.getNewGroup(req.params.b_id));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 //Holt den Inhalt einer Gruppe
 router.get('/content/:b_id', async function (req, res, next) {
   try {
@@ -72,6 +80,14 @@ router.post('/registrieren/neu', async function (req, res, next) {
 router.post('/groups', async function (req, res, next) {
   try {
     res.status(200).send(await datenbank.addGroup(req.body));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.post('/content/:g_id', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.addContent(req.body));
   } catch (error) {
     res.status(400).send(error);
   }

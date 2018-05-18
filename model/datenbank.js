@@ -79,6 +79,34 @@ async function getUser(name) {
     }
 }
 
+async function getNewGroup(b_id) {
+    try {
+        let promise = new Promise(resolve => {
+            connection.query('SELECT l_id, g_name FROM benutzer JOIN liste WHERE BINARY name = ?', b_id, function (err, rows, fields) {
+                if (!err) {
+                    var groups =[];
+                    rows.forEach(element => {
+                        groups.push({
+                            l_id: element.l_id,
+                            g_name: element.g_name,
+                        });
+                    });
+                    console.log(groups);
+                    resolve(groups);
+                }
+                else {
+                    throw err;
+                }
+            });
+        });
+        return await promise;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 async function getUserGroups(id) {
     try {
         let promise = new Promise(resolve => {
@@ -231,4 +259,32 @@ async function getContent(g_id) {
     }
 }
 
-module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup, getContent, joinGroup };
+async function addContent(obj) {
+    try {
+        connection.query('INSERT INTO inhalt(frage, antwort, l_id) VALUES (?, ?, ?)', [obj.frage, obj.antwort, obj.g_id], function (err, rows, fields) {
+            if (!err) {
+                console.log("Neuen Inhalt hinzugefügt");
+            }
+            else {
+                throw err;
+            }
+        });
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+module.exports = {
+    getUsers,
+    addUser,
+    getUser,
+    loginCheck,
+    getUserGroups,
+    addGroup,
+    getContent,
+    joinGroup,
+    addContent,
+    getNewGroup
+};
