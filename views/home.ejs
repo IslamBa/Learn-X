@@ -20,17 +20,17 @@
         <section>
             <div class="container text-center">
                 <p class="text-oben">Fragen</p>
-                <p>Was ist die Hauptstadt von Österreich?</p>
+                <p id="rndFrage">-</p>
 
-                <p class="text-oben">Antwort</p>
+                <p  class="text-oben">Antwort</p>
                 <i class="medium material-icons drop-icon">arrow_drop_down</i>
                 <div class='drop-text'>
-                    <p>Wien</p>
+                    <p id="rndAntwort">-</p>
                 </div>
                 <br>
                 <br>
                 <br>
-                <button class="waves-effect waves-light btn-large btn_white">ZUFÄLLIG</button>
+                <button id="btnRandom" class="waves-effect waves-light btn-large btn_white">ZUFÄLLIG</button>
             </div>
         </section>
         <section>
@@ -82,7 +82,7 @@
                 <p class="b_id" id="<%=benutzer.b_id%>">
                     <%= benutzer.b_id%>
                 </p>
-                <p class="text-oben">GROUP NAME</p>
+                <p class="text-oben gruppe">GROUP NAME</p>
                 <p id="groupName">-</p>
                 <p class="text-oben">GROUP ID</p>
                 <p id="groupID">-</p>
