@@ -133,6 +133,11 @@ function getGroups() {
 getGroups();
 
 $(".anyClass").on("click",".group_name",function(){
+    
+})
+
+
+$(".anyClass").on("click",".group_name",function(){
     let g_id = $(this).attr("id");
     let g_name = $(this).text();
     $("#groupID").text(g_id);
