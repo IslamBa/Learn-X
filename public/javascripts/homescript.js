@@ -7,7 +7,7 @@ $("body").bind("mousewheel", function (evt, chg) {
 
 
 $(".navLink").click(function () {
-    
+
     $(".main").enable();
     //OnePage wechsel mit unterer Navigation
     var unterschied = Math.abs($(this).index() - $(".activeLink").index());
@@ -107,13 +107,13 @@ function getGroups() {
         success(res) {
             console.log("gruppen bekommen");
             res.forEach(element => {
-                let htmlString = 
-                `<div class="row group_row">
+                let htmlString =
+                    `<div class="row group_row">
                 <div class="col-10" align="left">
-                    <h4 id="`+element.l_id+`" class="group_name">
-                       `+element.g_name+`
+                    <h4 id="`+ element.l_id + `" class="group_name">
+                       `+ element.g_name + `
                     </h4>
-                    <span class="anzahl" style="display:none;">`+element.pers_anz+`</span>
+                    <span class="anzahl" style="display:none;">`+ element.pers_anz + `</span>
                 </div>
                 <div class="col-2 group_col">
                     <div>
@@ -132,28 +132,29 @@ function getGroups() {
 
 getGroups();
 
-$(".anyClass").on("click",".group_name",function(){
+$(".anyClass").on("click", ".group_name", function () {
     let g_id = $(this).attr("id");
     let g_name = $(this).text();
     $("#groupID").text(g_id);
     $("#groupName").text(g_name);
     $.ajax({
-        method:"get",
-        url:"/content/"+g_id,
-        success(res){
+        method: "get",
+        url: "/content/" + g_id,
+        success(res) {
             console.log(res);
-            $(".gruppe").attr("id", g_id); 
+            $(".gruppe").attr("id", g_id);
             var random = Math.floor((Math.random() * res.length) + 0);
             $(".Fragen").empty();
             $(".Fragen").append('<i class="medium material-icons">add_circle</i>');
-            $("#rndFrage").text(res[random].frage);
-            $("#rndAntwort").text(res[random].antwort);
-            if(res.length > 0){
+            $("#groupCount").text("1");
+            if (res.length > 0) {
+                $("#rndFrage").text(res[random].frage);
+                $("#rndAntwort").text(res[random].antwort);
                 $("#groupCount").text(res[0].pers_anz);
                 res.forEach(element => {
                     let fragen = `<div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        `+element.frage+`
+                        `+ element.frage + `
                         <i class="material-icons right">create</i>
                         <hr>
                     </div>
@@ -162,29 +163,33 @@ $(".anyClass").on("click",".group_name",function(){
                 });
             }
         },
-        error(err){
+        error(err) {
             console.log(err);
         }
     })
 });
 
-$("#btnRandom").click(function(){
-    if($("#groupID").text() == "-") alert("Bitte Gruppe auswählen");
-    else{
+$("#btnRandom").click(function () {
+    if ($("#groupID").text() == "-") alert("Bitte Gruppe auswählen");
+    else {
         var g_id = $(".gruppe").attr("id");
         $.ajax({
-            method:"get",
-            url:"/content/"+g_id,
-            success(res){
+            method: "get",
+            url: "/content/" + g_id,
+            success(res) {
                 console.log(res);
                 var random = Math.floor((Math.random() * res.length) + 0);
-                $("#rndFrage").text(res[random].frage);
-                $("#rndAntwort").text(res[random].antwort);
+                if (res.length > 0) {
+                    $("#rndFrage").text(res[random].frage);
+                    $("#rndAntwort").text(res[random].antwort);
+                }
             },
-            error(err){
+            error(err) {
                 console.log(err);
             }
         })
     }
 })
+
+
 
