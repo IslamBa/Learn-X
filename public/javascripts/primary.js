@@ -68,3 +68,8 @@ $(".joinGroup").click(function(){
     $(".popup").fadeOut(500);
     $(".bottomNav").addClass("fixed-bottom");
 })
+
+$(".addQuestion").click(function(){
+    $(".popup").fadeOut(500);
+    $(".bottomNav").addClass("fixed-bottom");
+})
