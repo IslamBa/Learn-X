@@ -231,4 +231,21 @@ async function getContent(g_id) {
     }
 }
 
-module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup, getContent, joinGroup };
+async function addContent(obj) {
+    try {
+        connection.query('INSERT INTO inhalt(frage, antwort, l_id) VALUES (?, ?, ?)', [obj.frage, obj.antwort, obj.g_id], function (err, rows, fields) {
+            if (!err) {
+                console.log("Neuen Inhalt hinzugefügt");
+            }
+            else {
+                throw err;
+            }
+        });
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup, getContent, joinGroup, addContent };

@@ -145,15 +145,14 @@ $(".anyClass").on("click", ".group_name", function () {
             console.log(res);
             $(".gruppe").attr("id", g_id);
             var random = Math.floor((Math.random() * res.length) + 0);
-            $(".Fragen").empty();
-            $(".Fragen").append('<i class="medium material-icons">add_circle</i>');
+            $(".frg").remove();
             $("#groupCount").text("1");
             if (res.length > 0) {
                 $("#rndFrage").text(res[random].frage);
                 $("#rndAntwort").text(res[random].antwort);
                 $("#groupCount").text(res[0].pers_anz);
                 res.forEach(element => {
-                    let fragen = `<div class="row">
+                    let fragen = `<div class="row frg">
                     <div value="`+element.f_id+`" class="col-lg-12 col-md-12 col-sm-12 frage">
                         `+ element.frage + `
                         <i class="material-icons right">create</i>
@@ -193,9 +192,8 @@ $("#btnRandom").click(function () {
 })
 
 $(".joinGroup").click(function () {
-    let g_id = $("#join_groupName").val();
+    let g_id = $(".gruppe").attr("id");
     let b_id = $(".b_id").attr("id");
-    // alert(g_id + " " + b_id);
     $.ajax({
         url: "/groups/" + g_id,
         method: "put",
@@ -211,6 +209,29 @@ $(".joinGroup").click(function () {
             console.log(err);
         }
     });
+});
+
+$(".addInhalt").click(function(){
+    let frage = $("#newFrage").val();
+    let antwort = $("#newAntwort").val();
+    let g_id = $(".gruppe").attr("id");
+    // alert(frage + " " + antwort + " " + g_id);
+    $.ajax({
+        url:"/content/"+g_id,
+        method:"post",
+        data:{
+            frage: frage,
+            antwort: antwort,
+            g_id: g_id
+        },
+        success(res){
+            alert("Inhalt hinzugefügt")
+            console.log("Inhalt hinzugefügt");
+        },
+        error(err){
+            console.log(err);
+        }
+    })
 });
 
 
