@@ -36,6 +36,14 @@ router.get('/groups/:b_id', async function (req, res, next) {
   }
 });
 
+router.get('/group/:b_id', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.getNewGroup(req.params.b_id));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 //Holt den Inhalt einer Gruppe
 router.get('/content/:b_id', async function (req, res, next) {
   try {
