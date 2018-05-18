@@ -79,33 +79,6 @@ async function getUser(name) {
     }
 }
 
-async function getNewGroup(b_id) {
-    try {
-        let promise = new Promise(resolve => {
-            connection.query('SELECT l_id, g_name FROM benutzer JOIN liste WHERE BINARY name = ?', b_id, function (err, rows, fields) {
-                if (!err) {
-                    var groups =[];
-                    rows.forEach(element => {
-                        groups.push({
-                            l_id: element.l_id,
-                            g_name: element.g_name,
-                        });
-                    });
-                    console.log(groups);
-                    resolve(groups);
-                }
-                else {
-                    throw err;
-                }
-            });
-        });
-        return await promise;
-    }
-    catch (error) {
-        console.log(error);
-        throw error;
-    }
-}
 
 async function getUserGroups(id) {
     try {
@@ -285,6 +258,5 @@ module.exports = {
     addGroup,
     getContent,
     joinGroup,
-    addContent,
-    getNewGroup
+    addContent
 };
