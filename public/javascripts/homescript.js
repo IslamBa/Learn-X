@@ -141,6 +141,7 @@ $(".anyClass").on("click", ".group_name", function () {
         method: "get",
         url: "/content/" + g_id,
         success(res) {
+            alert("gruppe ausgewählt")
             console.log(res);
             $(".gruppe").attr("id", g_id);
             var random = Math.floor((Math.random() * res.length) + 0);
@@ -153,7 +154,7 @@ $(".anyClass").on("click", ".group_name", function () {
                 $("#groupCount").text(res[0].pers_anz);
                 res.forEach(element => {
                     let fragen = `<div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div value="`+element.f_id+`" class="col-lg-12 col-md-12 col-sm-12 frage">
                         `+ element.frage + `
                         <i class="material-icons right">create</i>
                         <hr>
@@ -190,6 +191,27 @@ $("#btnRandom").click(function () {
         })
     }
 })
+
+$(".joinGroup").click(function () {
+    let g_id = $("#join_groupName").val();
+    let b_id = $(".b_id").attr("id");
+    // alert(g_id + " " + b_id);
+    $.ajax({
+        url: "/groups/" + g_id,
+        method: "put",
+        data : {
+            b_id: b_id,
+            g_id: g_id
+        },
+        success(res) {
+            console.log("Gruppe gejoint" + res);
+            alert("Gruppe beigetreten");
+        },
+        error(err) {
+            console.log(err);
+        }
+    });
+});
 
 
 

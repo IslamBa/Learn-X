@@ -97,7 +97,7 @@ async function getUserGroups(id) {
                     });
                     resolve(userGroup);
                 }
-                else if(rows.length < 0){
+                else if (rows.length < 0) {
                     resolve(false);
                 }
                 else {
@@ -133,7 +133,32 @@ async function addGroup(obj) {
                 throw err;
             }
         });
-        
+
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function joinGroup(obj) {
+    try {
+        connection.query('INSERT INTO benutzer_liste (b_id, l_id) VALUES(?,?)', [obj.b_id, obj.g_id], function (err, rows, fields) {
+            if (!err) {
+                console.log("In Gruppe gejoint");
+                connection.query('UPDATE liste SET pers_anz=pers_anz+1 WHERE l_id = ?', [obj.g_id], function (err, rows, fields) {
+                    if (!err) {
+                        console.log("Personen Anzahl erhöht");
+                    }
+                    else {
+                        throw err;
+                    }
+                });
+            }
+            else {
+                throw err;
+            }
+        });
     }
     catch (error) {
         console.log(error);
@@ -190,7 +215,7 @@ async function getContent(g_id) {
                     });
                     resolve(content);
                 }
-                else if(rows.length < 0){
+                else if (rows.length < 0) {
                     resolve(false);
                 }
                 else {
@@ -206,4 +231,4 @@ async function getContent(g_id) {
     }
 }
 
-module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup, getContent };
+module.exports = { getUsers, addUser, getUser, loginCheck, getUserGroups, addGroup, getContent, joinGroup };

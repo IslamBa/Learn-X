@@ -77,6 +77,13 @@ router.post('/groups', async function (req, res, next) {
   }
 });
 
+router.put('/groups/:b_id', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.joinGroup(req.body));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
 
 router.get('/impressum', function (req, res) {
   res.render('impressum')
