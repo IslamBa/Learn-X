@@ -59,3 +59,12 @@ $(function () {
 
 });
 
+$(".addGroup").click(function(){
+    $(".popup").fadeOut(500);
+    $(".bottomNav").addClass("fixed-bottom");
+})
+
+$(".joinGroup").click(function(){
+    $(".popup").fadeOut(500);
+    $(".bottomNav").addClass("fixed-bottom");
+})

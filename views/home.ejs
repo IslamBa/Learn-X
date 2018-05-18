@@ -35,12 +35,12 @@
         </section>
         <section>
             <div class="container text-center">
-                <button class="new-group waves-effect waves-light btn-large btn_white" data-popup-open="popup-1" href="#">Neue Gruppe</button>
+                <button class="new-group waves-effect waves-green btn-large btn_white" data-popup-open="popup-1" href="#">Neue Gruppe</button>
                 <br>
                 <br>
                 <hr>
                 <br>
-                <button class="waves-effect waves-light btn-large btn_dark">Beitreten</button>
+                <button class="waves-effect waves-light btn-large btn_dark" data-popup-open="popup-1">Beitreten</button>
                 <br>
                 <br>
                 <hr>
@@ -56,12 +56,26 @@
                     <div class="popup-inner">
                         <div class="input-field col s12">
                             <input id="new_groupName" type="text" class="validate">
-                            <label for="gruppen_name">Gruppen Name eingeben</label>
+                            <label for="gruppen_name">Neue Gruppen Name eingeben</label>
                         </div>
                         <button class="btn waves-effect waves-light addGroup" name="action">Submit
                             <i class="material-icons right">send</i>
                         </button>
                         <a class="popup-close" data-popup-close="popup-1">x</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="popup" data-popup="popup-2">
+                    <div class="popup-inner">
+                        <div class="input-field col s12">
+                            <input id="join_groupName" type="text" class="validate">
+                            <label for="join_gruppen_name">Gruppen Name eingeben</label>
+                        </div>
+                        <button class="btn waves-effect waves-light joinGroup" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <a class="popup-close" data-popup-close="popup-2">x</a>
                     </div>
                 </div>
             </div>
