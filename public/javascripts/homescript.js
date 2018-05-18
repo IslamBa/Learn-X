@@ -142,8 +142,12 @@ $(".anyClass").on("click",".group_name",function(){
         url:"/content/"+g_id,
         success(res){
             console.log(res);
+            $(".gruppe").attr("id", g_id); 
+            var random = Math.floor((Math.random() * res.length) + 0);
             $(".Fragen").empty();
             $(".Fragen").append('<i class="medium material-icons">add_circle</i>');
+            $("#rndFrage").text(res[random].frage);
+            $("#rndAntwort").text(res[random].antwort);
             if(res.length > 0){
                 $("#groupCount").text(res[0].pers_anz);
                 res.forEach(element => {
@@ -163,4 +167,24 @@ $(".anyClass").on("click",".group_name",function(){
         }
     })
 });
+
+$("#btnRandom").click(function(){
+    if($("#groupID").text() == "-") alert("Bitte Gruppe auswählen");
+    else{
+        var g_id = $(".gruppe").attr("id");
+        $.ajax({
+            method:"get",
+            url:"/content/"+g_id,
+            success(res){
+                console.log(res);
+                var random = Math.floor((Math.random() * res.length) + 0);
+                $("#rndFrage").text(res[random].frage);
+                $("#rndAntwort").text(res[random].antwort);
+            },
+            error(err){
+                console.log(err);
+            }
+        })
+    }
+})
 
