@@ -110,7 +110,7 @@ function getGroups() {
             $(".anyClass").empty();
             res.forEach(element => {
                 let htmlString =
-                    `<div id="`+ element.l_id + `" class="row group_row group_name">
+                    `<div id="` + element.l_id + `" class="row group_row group_name">
                 <div class="col-10" align="left">
                     <h4>
                        `+ element.g_name + `
@@ -132,12 +132,12 @@ function getGroups() {
     });
 };
 
-$(".anyClass").on("click",".group_row",function(){
-    for(var i = 0; i <= $(".group_row").length; i++){
-        if($(".group_row").eq(i).hasClass("border_row")){
+$(".anyClass").on("click", ".group_row", function () {
+    for (var i = 0; i <= $(".group_row").length; i++) {
+        if ($(".group_row").eq(i).hasClass("border_row")) {
             $(".group_row").eq(i).removeClass("border_row")
         }
-        else{
+        else {
             $(this).addClass("border_row");
         }
     }
@@ -183,10 +183,7 @@ $(".anyClass").on("click", ".group_name", function () {
 
 });
 
-$(document).on("click",".bearbeiten",function(){
-    $("#popup4").show();
-    $(".bottomNav").removeClass("fixed-bottom");
-})
+
 
 
 
@@ -235,32 +232,45 @@ $(".joinGroup").click(function () {
 });
 
 $(".addInhalt").click(function () {
-    let frage = $("#newFrage").val();
-    let antwort = $("#newAntwort").val();
-    let g_id = $(".gruppe").attr("id");
-    if (g_id == undefined) { alert("Bitte Gruppe auswählen"); }
+    if ($("#newFrage").val() == "" || $("#newAntwort").val() == "") {
+        alert("Bitte alle Felder ausfüllen !");
+    }
     else {
-        $.ajax({
-            url: "/content/" + g_id,
-            method: "post",
-            data: {
-                frage: frage,
-                antwort: antwort,
-                g_id: g_id
-            },
-            success(res) {
-                alert("Inhalt hinzugefügt");
-                getContent();
-                console.log("Inhalt hinzugefügt");
-            },
-            error(err) {
-                console.log(err);
-            }
-        })
+        let frage = $("#newFrage").val();
+        let antwort = $("#newAntwort").val();
+
+        let g_id = $(".gruppe").attr("id");
+        if (g_id == undefined) { alert("Bitte Gruppe auswählen"); }
+        else {
+            $.ajax({
+                url: "/content/" + g_id,
+                method: "post",
+                data: {
+                    frage: frage,
+                    antwort: antwort,
+                    g_id: g_id
+                },
+                success(res) {
+                    alert("Inhalt hinzugefügt");
+                    getContent();
+                    console.log("Inhalt hinzugefügt");
+                },
+                error(err) {
+                    console.log(err);
+                }
+            })
+        }
+        $(".popup").fadeOut(500);
+        $(".bottomNav").addClass("fixed-bottom");
     }
 });
 
-function getContent(){
+$(document).on("click", ".bearbeiten", function () {
+    $("#popup4").show();
+    $(".bottomNav").removeClass("fixed-bottom");
+})
+
+function getContent() {
     let g_id = $(".gruppe").attr("id");
     $.ajax({
         method: "get",

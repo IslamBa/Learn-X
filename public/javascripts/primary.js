@@ -81,3 +81,8 @@ $(".addQuestion").click(function(){
     $(".popup").fadeOut(500);
     $(".bottomNav").addClass("fixed-bottom");
 })
+
+$(".updateInhalt").click(function(){
+    $(".popup").fadeOut(500);
+    $(".bottomNav").addClass("fixed-bottom");
+})
