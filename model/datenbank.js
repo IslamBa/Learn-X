@@ -79,7 +79,6 @@ async function getUser(name) {
     }
 }
 
-
 async function getUserGroups(id) {
     try {
         let promise = new Promise(resolve => {
@@ -92,7 +91,8 @@ async function getUserGroups(id) {
                             name: element.name,
                             l_id: element.l_id,
                             g_name: element.g_name,
-                            pers_anz: element.pers_anz
+                            pers_anz: element.pers_anz,
+                            rnd_id: element.rnd_id
                         })
                         console.log(element);
                     });
@@ -116,7 +116,6 @@ async function getUserGroups(id) {
 
 async function addGroup(obj) {
     try {
-        //var g_id;
         connection.query('INSERT INTO liste (g_name, pers_anz) VALUES (?,1)', [obj.g_name], function (err, rows, fields) {
             if (!err) {
                 console.log("Neue Gruppe hinzugefügt");
@@ -144,12 +143,21 @@ async function addGroup(obj) {
 
 async function joinGroup(obj) {
     try {
-        connection.query('INSERT INTO benutzer_liste (b_id, l_id) VALUES(?,?)', [obj.b_id, obj.g_id], function (err, rows, fields) {
+        connection.query('SELECT l_id FROM liste WHERE rnd_id = ?', [obj.rnd_id], function (err, rows, fields) {
             if (!err) {
-                console.log("In Gruppe gejoint");
-                connection.query('UPDATE liste SET pers_anz=pers_anz+1 WHERE l_id = ?', [obj.g_id], function (err, rows, fields) {
+                console.log(rows[0].l_id);
+                var l_id = rows[0].l_id;
+                connection.query('INSERT INTO benutzer_liste (b_id, l_id) VALUES(?,?)', [obj.b_id, l_id], function (err, rows, fields) {
                     if (!err) {
-                        console.log("Personen Anzahl erhöht");
+                        console.log("In Gruppe gejoint");
+                        connection.query('UPDATE liste SET pers_anz=pers_anz+1 WHERE rnd_id = ?', [obj.rnd_id], function (err, rows, fields) {
+                            if (!err) {
+                                console.log("Personen Anzahl erhöht");
+                            }
+                            else {
+                                throw err;
+                            }
+                        });
                     }
                     else {
                         throw err;
@@ -197,10 +205,10 @@ async function addUser(obj) {
     }
 }
 
-async function getContent(g_id) {
+async function getContent(rnd_id) {
     try {
         let promise = new Promise(resolve => {
-            connection.query('SELECT * FROM liste JOIN inhalt USING(l_id) WHERE l_id = ?', g_id, function (err, rows, fields) {
+            connection.query('SELECT * FROM liste JOIN inhalt USING(l_id) WHERE rnd_id = ?', rnd_id, function (err, rows, fields) {
                 if (!err) {
                     var content = [];
                     rows.forEach(element => {
@@ -210,7 +218,8 @@ async function getContent(g_id) {
                             pers_anz: element.pers_anz,
                             f_id: element.f_id,
                             frage: element.frage,
-                            antwort: element.antwort
+                            antwort: element.antwort,
+                            rnd_id: element.rnd_id
                         })
                         console.log(element);
                     });
@@ -234,9 +243,17 @@ async function getContent(g_id) {
 
 async function addContent(obj) {
     try {
-        connection.query('INSERT INTO inhalt(frage, antwort, l_id) VALUES (?, ?, ?)', [obj.frage, obj.antwort, obj.g_id], function (err, rows, fields) {
+        connection.query('SELECT l_id FROM liste WHERE rnd_id = ?', [obj.rnd_id], function (err, rows, fields) {
             if (!err) {
-                console.log("Neuen Inhalt hinzugefügt");
+                var g_id = rows[0].l_id;
+                connection.query('INSERT INTO inhalt(frage, antwort, l_id) VALUES (?, ?, ?)', [obj.frage, obj.antwort, g_id], function (err, rows, fields) {
+                    if (!err) {
+                        console.log("Neuen Inhalt hinzugefügt");
+                    }
+                    else {
+                        throw err;
+                    }
+                });
             }
             else {
                 throw err;
