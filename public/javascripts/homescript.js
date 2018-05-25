@@ -93,6 +93,7 @@ $(".addGroup").click(function () {
     let g_name = $("#new_groupName").val();
     let b_id = $(".b_id").attr("id");
     let rnd_id = makeid();
+    
     $.ajax({
         method: "post",
         url: "/groups",
@@ -102,7 +103,7 @@ $(".addGroup").click(function () {
             rnd_id: rnd_id
         },
         success(res) {
-            alert("Neue Gruppe hinzugefügt")
+            alert("Neue Gruppe hinzugefügt");
             getGroups();
         },
         error(err) {

@@ -116,10 +116,9 @@ async function getUserGroups(id) {
 
 async function addGroup(obj) {
     try {
-        connection.query('INSERT INTO liste (g_name, pers_anz) VALUES (?,1)', [obj.g_name], function (err, rows, fields) {
+        connection.query('INSERT INTO liste (g_name, pers_anz, rnd_id) VALUES (?,1,?)', [obj.g_name, obj.rnd_id], function (err, rows, fields) {
             if (!err) {
-                console.log("Neue Gruppe hinzugefügt");
-                console.log("letzze id" + rows.insertId);
+                console.log("letzte id " + rows.insertId);
                 connection.query('INSERT INTO benutzer_liste (b_id, l_id) VALUES(?,?)', [obj.b_id, rows.insertId], function (err, rows, fields) {
                     if (!err) {
                         console.log("Neue Gruppe hinzugefügt");
@@ -133,7 +132,6 @@ async function addGroup(obj) {
                 throw err;
             }
         });
-
     }
     catch (error) {
         console.log(error);
