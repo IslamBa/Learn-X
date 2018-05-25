@@ -167,8 +167,9 @@ $(".anyClass").on("click", ".group_name", function () {
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
-                        `+ element.frage + `
+                    <p class="frage_element">`+ element.frage + `</p>
                         <i class="material-icons right bearbeiten">create</i>
+                        <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
                     </div>
                     </div>`
@@ -186,7 +187,19 @@ $(".anyClass").on("click", ".group_name", function () {
 
 
 
+let fid;
+let indexContent;
 
+$(document).on("click", ".bearbeiten", function () {
+    $("#popup4").show();
+    indexContent = $(this).parents(".frg").index();
+    alert(indexContent);
+    let frg = $(this).closest(".frage").find("p").text();
+    let ant = $(this).closest(".frage").find(".antwort").attr("value");
+    fid = $(this).closest(".frage").attr("value");
+    $("#updateFrage").val(frg);
+    $("#updateAntwort").val(ant);
+});
 
 $("#btnRandom").click(function () {
     if ($("#groupID").text() == "-") alert("Bitte Gruppe auswählen");
@@ -282,8 +295,9 @@ function getContent() {
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
-                        `+ element.frage + `
+                    <p class="frage_element">`+ element.frage + `</p>
                         <i class="material-icons right">create</i>
+                        <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
                     </div>
                     </div>`
@@ -296,6 +310,28 @@ function getContent() {
         }
     })
 }
+
+$(".updateInhalt").click(function () {
+    let frg = $("#updateFrage").val();
+    let ant = $("#updateAntwort").val();
+    $.ajax({
+        method: "put",
+        url: "/content/"+fid,
+        data:{
+            fid: fid,
+            frage: frg,
+            antwort: ant
+        },
+        success(res){
+            console.log("Inhalt verändert");
+            $(".frg").eq(indexContent).children(".frage_element").text(frg);
+            $(".frg").eq(indexContent).children(".antwort").text(ant);
+        },
+        error(err){
+            console.log(err);
+        }
+    })
+});
 
 
 
