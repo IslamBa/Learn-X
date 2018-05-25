@@ -40,6 +40,14 @@ $(".new-group").click(function () {
 })
 
 
+$(".beitritt-group").click(function () {
+    $(".bottomNav").removeClass("fixed-bottom");
+ })
+
+ $(".addfrage").click(function () {
+    $(".bottomNav").removeClass("fixed-bottom");
+ })
+
 //Pop Up öffnen
 $(function () {
     //----- OPEN
@@ -70,6 +78,11 @@ $(".joinGroup").click(function(){
 })
 
 $(".addQuestion").click(function(){
+    $(".popup").fadeOut(500);
+    $(".bottomNav").addClass("fixed-bottom");
+})
+
+$(".updateInhalt").click(function(){
     $(".popup").fadeOut(500);
     $(".bottomNav").addClass("fixed-bottom");
 })

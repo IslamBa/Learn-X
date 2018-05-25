@@ -185,6 +185,8 @@ $(".anyClass").on("click", ".group_name", function () {
 });
 
 
+
+
 let fid;
 let indexContent;
 
@@ -242,30 +244,43 @@ $(".joinGroup").click(function () {
 });
 
 $(".addInhalt").click(function () {
-    let frage = $("#newFrage").val();
-    let antwort = $("#newAntwort").val();
-    let g_id = $(".gruppe").attr("id");
-    if (g_id == undefined) { alert("Bitte Gruppe auswählen"); }
+    if ($("#newFrage").val() == "" || $("#newAntwort").val() == "") {
+        alert("Bitte alle Felder ausfüllen !");
+    }
     else {
-        $.ajax({
-            url: "/content/" + g_id,
-            method: "post",
-            data: {
-                frage: frage,
-                antwort: antwort,
-                g_id: g_id
-            },
-            success(res) {
-                alert("Inhalt hinzugefügt");
-                getContent();
-                console.log("Inhalt hinzugefügt");
-            },
-            error(err) {
-                console.log(err);
-            }
-        })
+        let frage = $("#newFrage").val();
+        let antwort = $("#newAntwort").val();
+
+        let g_id = $(".gruppe").attr("id");
+        if (g_id == undefined) { alert("Bitte Gruppe auswählen"); }
+        else {
+            $.ajax({
+                url: "/content/" + g_id,
+                method: "post",
+                data: {
+                    frage: frage,
+                    antwort: antwort,
+                    g_id: g_id
+                },
+                success(res) {
+                    alert("Inhalt hinzugefügt");
+                    getContent();
+                    console.log("Inhalt hinzugefügt");
+                },
+                error(err) {
+                    console.log(err);
+                }
+            })
+        }
+        $(".popup").fadeOut(500);
+        $(".bottomNav").addClass("fixed-bottom");
     }
 });
+
+$(document).on("click", ".bearbeiten", function () {
+    $("#popup4").show();
+    $(".bottomNav").removeClass("fixed-bottom");
+})
 
 function getContent() {
     let g_id = $(".gruppe").attr("id");
