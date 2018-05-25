@@ -115,8 +115,14 @@ hr {
     font-weight: 300;
 }
 .group_row{
-    background-color: white;
-    color:#2BABE2;
+    border : solid white 2px;
+    color:white;
+    height: 70px;
+}
+
+.border_row{
+    border : solid rgb(23, 155, 23) 2px;
+    color:rgb(23, 155, 23);
     height: 70px;
 }
 
@@ -130,6 +136,7 @@ hr {
     height: 35px;
     background-color: #56cd56;
     margin-top: 17px;
+
 }
 
 .group_col{
