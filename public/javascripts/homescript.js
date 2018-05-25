@@ -110,9 +110,9 @@ function getGroups() {
             $(".anyClass").empty();
             res.forEach(element => {
                 let htmlString =
-                    `<div class="row group_row">
+                    `<div id="`+ element.l_id + `" class="row group_row group_name">
                 <div class="col-10" align="left">
-                    <h4 id="`+ element.l_id + `" class="group_name">
+                    <h4>
                        `+ element.g_name + `
                     </h4>
                     <span class="anzahl" style="display:none;">`+ element.pers_anz + `</span>
@@ -133,7 +133,6 @@ function getGroups() {
 };
 
 $(".anyClass").on("click",".group_row",function(){
-    
     for(var i = 0; i <= $(".group_row").length; i++){
         if($(".group_row").eq(i).hasClass("border_row")){
             $(".group_row").eq(i).removeClass("border_row")
@@ -142,16 +141,13 @@ $(".anyClass").on("click",".group_row",function(){
             $(this).addClass("border_row");
         }
     }
-   
 })
-
-
 
 getGroups();
 
 $(".anyClass").on("click", ".group_name", function () {
     let g_id = $(this).attr("id");
-    let g_name = $(this).text();
+    let g_name = $(this).find(".col-10").find("h4").text();
     $("#groupID").text(g_id);
     $("#groupName").text(g_name);
     $.ajax({
