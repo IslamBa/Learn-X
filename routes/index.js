@@ -53,6 +53,14 @@ router.get('/content/:b_id', async function (req, res, next) {
   }
 });
 
+router.put('/content/:fid', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.updateContent(req.body));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 router.get('/benutzer/:name', async function (req, res, next) {
   try {
     res.status(200).send(await datenbank.getUser(req.params.name));

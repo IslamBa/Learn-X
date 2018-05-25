@@ -110,7 +110,7 @@ function getGroups() {
             $(".anyClass").empty();
             res.forEach(element => {
                 let htmlString =
-                    `<div id="`+ element.l_id + `" class="row group_row group_name">
+                    `<div id="` + element.l_id + `" class="row group_row group_name">
                 <div class="col-10" align="left">
                     <h4>
                        `+ element.g_name + `
@@ -132,12 +132,12 @@ function getGroups() {
     });
 };
 
-$(".anyClass").on("click",".group_row",function(){
-    for(var i = 0; i <= $(".group_row").length; i++){
-        if($(".group_row").eq(i).hasClass("border_row")){
+$(".anyClass").on("click", ".group_row", function () {
+    for (var i = 0; i <= $(".group_row").length; i++) {
+        if ($(".group_row").eq(i).hasClass("border_row")) {
             $(".group_row").eq(i).removeClass("border_row")
         }
-        else{
+        else {
             $(this).addClass("border_row");
         }
     }
@@ -167,8 +167,9 @@ $(".anyClass").on("click", ".group_name", function () {
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
-                        `+ element.frage + `
+                    <p class="frage_element">`+ element.frage + `</p>
                         <i class="material-icons right bearbeiten">create</i>
+                        <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
                     </div>
                     </div>`
@@ -183,12 +184,20 @@ $(".anyClass").on("click", ".group_name", function () {
 
 });
 
-$(document).on("click",".bearbeiten",function(){
+
+let fid;
+let indexContent;
+
+$(document).on("click", ".bearbeiten", function () {
     $("#popup4").show();
-})
-
-
-
+    indexContent = $(this).parents(".frg").index();
+    alert(indexContent);
+    let frg = $(this).closest(".frage").find("p").text();
+    let ant = $(this).closest(".frage").find(".antwort").attr("value");
+    fid = $(this).closest(".frage").attr("value");
+    $("#updateFrage").val(frg);
+    $("#updateAntwort").val(ant);
+});
 
 $("#btnRandom").click(function () {
     if ($("#groupID").text() == "-") alert("Bitte Gruppe auswählen");
@@ -259,7 +268,7 @@ $(".addInhalt").click(function () {
     }
 });
 
-function getContent(){
+function getContent() {
     let g_id = $(".gruppe").attr("id");
     $.ajax({
         method: "get",
@@ -271,8 +280,9 @@ function getContent(){
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
-                        `+ element.frage + `
+                    <p class="frage_element">`+ element.frage + `</p>
                         <i class="material-icons right">create</i>
+                        <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
                     </div>
                     </div>`
@@ -285,6 +295,28 @@ function getContent(){
         }
     })
 }
+
+$(".updateInhalt").click(function () {
+    let frg = $("#updateFrage").val();
+    let ant = $("#updateAntwort").val();
+    $.ajax({
+        method: "put",
+        url: "/content/"+fid,
+        data:{
+            fid: fid,
+            frage: frg,
+            antwort: ant
+        },
+        success(res){
+            console.log("Inhalt verändert");
+            $(".frg").eq(indexContent).children(".frage_element").text(frg);
+            $(".frg").eq(indexContent).children(".antwort").text(ant);
+        },
+        error(err){
+            console.log(err);
+        }
+    })
+});
 
 
 
