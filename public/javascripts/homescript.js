@@ -172,7 +172,7 @@ $(".anyClass").on("click", ".group_name", function () {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
                         `+ element.frage + `
-                        <i class="material-icons right">create</i>
+                        <i class="material-icons right bearbeiten">create</i>
                         <hr>
                     </div>
                     </div>`
@@ -186,6 +186,12 @@ $(".anyClass").on("click", ".group_name", function () {
     })
 
 });
+
+$(document).on("click",".bearbeiten",function(){
+    $("#popup4").show();
+})
+
+
 
 
 $("#btnRandom").click(function () {

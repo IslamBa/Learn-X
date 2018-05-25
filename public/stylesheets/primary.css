@@ -121,8 +121,8 @@ hr {
 }
 
 .border_row{
-    border : solid rgb(23, 155, 23) 2px;
-    color:rgb(23, 155, 23);
+    border : solid #ffc107 2px;
+    color: white;
     height: 70px;
 }
 
