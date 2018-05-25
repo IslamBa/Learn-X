@@ -189,6 +189,7 @@ $(".anyClass").on("click", ".group_name", function () {
 
 $(document).on("click",".bearbeiten",function(){
     $("#popup4").show();
+    $(".bottomNav").removeClass("fixed-bottom");
 })
 
 
