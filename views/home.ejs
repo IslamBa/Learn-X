@@ -18,12 +18,14 @@
 
     <div class="main">
         <section>
-            <a href="/login"><i class="small material-icons right" style="padding: 1%; color: white">power_settings_new</i></a>
+            <a href="/login">
+                <i class="small material-icons right" style="padding: 1%; color: white">power_settings_new</i>
+            </a>
             <div class="container text-center">
                 <p class="text-oben">Fragen</p>
                 <p id="rndFrage">-</p>
 
-                <p  class="text-oben">Antwort</p>
+                <p class="text-oben">Antwort</p>
                 <i class="medium material-icons drop-icon">arrow_drop_down</i>
                 <div class='drop-text'>
                     <p id="rndAntwort">-</p>
@@ -85,26 +87,43 @@
         <section>
             <div class="container center Fragen">
                 <i class="medium material-icons" data-popup-open="popup-3">add_circle</i>
-                <br><br>
+                <br>
+                <br>
             </div>
             <div class="row">
-                    <div class="popup" data-popup="popup-3">
-                        <div class="popup-inner">
-                            <div class="input-field col s12">
-                                <input id="newFrage" type="text" class="validate">
-                                <label for="fragen_name">Neue Frage eingeben</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <input id="newAntwort" type="text" class="validate">
-                                <label for="antworten_name">Antwort eingeben</label>
-                            </div>
-                            <button class="btn waves-effect waves-light addInhalt" name="action">Submit
-                                <i class="material-icons right">send</i>
-                            </button>
-                            <a class="popup-close" data-popup-close="popup-3">x</a>
+                <div class="popup" data-popup="popup-3">
+                    <div class="popup-inner">
+                        <div class="input-field col s12">
+                            <input id="newFrage" type="text" class="validate">
+                            <label for="fragen_name">Neue Frage eingeben</label>
                         </div>
+                        <div class="input-field col s12">
+                            <input id="newAntwort" type="text" class="validate">
+                            <label for="antworten_name">Antwort eingeben</label>
+                        </div>
+                        <button class="btn waves-effect waves-light addInhalt" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <a class="popup-close" data-popup-close="popup-3">x</a>
                     </div>
                 </div>
+                <div class="popup" data-popup="popup-4" id="popup4">
+                    <div class="popup-inner">
+                        <div class="input-field col s12">
+                            <input id="updateFrage" type="text" class="validate">
+                            <label for="fragen_name">Frage bearbeiten</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="updateAntwort" type="text" class="validate">
+                            <label for="antworten_name">Antwort bearbeiten</label>
+                        </div>
+                        <button class="btn waves-effect waves-light updateInhalt" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <a class="popup-close" data-popup-close="popup-4">x</a>
+                    </div>
+                </div>
+            </div>
         </section>
         <section>
             <div class="container text-center">
