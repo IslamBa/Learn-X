@@ -173,7 +173,7 @@ $(".anyClass").on("click", ".group_name", function () {
                         <hr>
                     </div>
                     </div>`
-                    $(".Fragen").append(fragen);
+                    $(".scrollfrage").append(fragen);
                 });
             }
         },
@@ -198,6 +198,8 @@ $(document).on("click", ".bearbeiten", function () {
     fid = $(this).closest(".frage").attr("value");
     $("#updateFrage").val(frg);
     $("#updateAntwort").val(ant);
+    $(".bottomNav").removeClass("fixed-bottom");
+    
 });
 
 $("#btnRandom").click(function () {
@@ -244,17 +246,17 @@ $(".joinGroup").click(function () {
 });
 
 $(".addInhalt").click(function () {
-    if ($("#newFrage").val() == "" || $("#newAntwort").val() == "") {
+    let g_id = $(".gruppe").attr("id");
+    if (g_id == undefined) { alert("Bitte Gruppe auswählen"); }
+    else if ($("#newFrage").val() == "" || $("#newAntwort").val() == "") {
         alert("Bitte alle Felder ausfüllen !");
     }
     else {
         let frage = $("#newFrage").val();
         let antwort = $("#newAntwort").val();
 
-        let g_id = $(".gruppe").attr("id");
-        if (g_id == undefined) { alert("Bitte Gruppe auswählen"); }
-        else {
-            $.ajax({
+        
+         $.ajax({
                 url: "/content/" + g_id,
                 method: "post",
                 data: {
@@ -271,16 +273,11 @@ $(".addInhalt").click(function () {
                     console.log(err);
                 }
             })
-        }
+        
         $(".popup").fadeOut(500);
         $(".bottomNav").addClass("fixed-bottom");
     }
 });
-
-$(document).on("click", ".bearbeiten", function () {
-    $("#popup4").show();
-    $(".bottomNav").removeClass("fixed-bottom");
-})
 
 function getContent() {
     let g_id = $(".gruppe").attr("id");
@@ -295,12 +292,12 @@ function getContent() {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
                     <p class="frage_element">`+ element.frage + `</p>
-                        <i class="material-icons right">create</i>
+                        <i class="material-icons right bearbeiten">create</i>
                         <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
                     </div>
                     </div>`
-                    $(".Fragen").append(fragen);
+                    $(".scrollfrage").append(fragen);
                 });
             }
         },
