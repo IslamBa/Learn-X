@@ -190,8 +190,7 @@ let indexContent;
 
 $(document).on("click", ".bearbeiten", function () {
     $("#popup4").show();
-    indexContent = $(this).parents(".frg").index();
-    alert(indexContent);
+    indexContent = $(this).parent().parent().index($('.frg'));
     let frg = $(this).closest(".frage").find("p").text();
     let ant = $(this).closest(".frage").find(".antwort").attr("value");
     fid = $(this).closest(".frage").attr("value");
@@ -309,8 +308,8 @@ $(".updateInhalt").click(function () {
         },
         success(res){
             console.log("Inhalt verändert");
-            $(".frg").eq(indexContent).children(".frage_element").text(frg);
-            $(".frg").eq(indexContent).children(".antwort").text(ant);
+            $(".frg").eq(indexContent).find(".frage_element").text(frg);
+            $(".frg").eq(indexContent).find(".antwort").attr("value", ant);
         },
         error(err){
             console.log(err);
