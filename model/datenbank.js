@@ -62,12 +62,16 @@ async function getUser(name) {
         let promise = new Promise(resolve => {
             connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', name, function (err, rows, fields) {
                 if (!err) {
-                    var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
-                    console.log(user);
-                    resolve(user);
+                    if(!rows.length) resolve("fehler")
+                    else{
+                        var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
+                        console.log(user);
+                        resolve(user);
+                    }
+
                 }
                 else {
-                    throw err;
+                    reject();
                 }
             });
         });
@@ -282,6 +286,23 @@ async function updateContent(obj) {
     }
 }
 
+async function deleteContent(fid) {
+    try {
+        connection.query('DELETE FROM inhalt WHERE f_id = ?', [fid], function (err, rows, fields) {
+            if (!err) {
+                console.log("Inhalt gelöscht");
+            }
+            else {
+                throw err;
+            }
+        });
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 module.exports = {
     getUsers,
     addUser,
@@ -292,5 +313,6 @@ module.exports = {
     getContent,
     joinGroup,
     addContent,
-    updateContent
+    updateContent,
+    deleteContent
 };

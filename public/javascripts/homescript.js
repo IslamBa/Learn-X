@@ -335,6 +335,21 @@ $(".updateInhalt").click(function () {
     })
 });
 
+$(".deleteInhalt").click(function () {
+    $.ajax({
+        method: "delete",
+        url: "/content/"+fid,
+        success(res){
+            console.log("Inhalt gelöscht");
+            $(".frg").eq(indexContent).remove();
+            $("#popup4").hide(600);
+        },
+        error(err){
+            console.log(err);
+        }
+    })
+});
+
 
 
 
