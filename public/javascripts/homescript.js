@@ -297,6 +297,8 @@ $(".addInhalt").click(function () {
         $(".popup").fadeOut(500);
         $(".bottomNav").addClass("fixed-bottom");
     }
+    $('#newFrage').val('');
+    $('#newAntwort').val('');
 });
 
 function getContent() {
