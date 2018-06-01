@@ -8,12 +8,12 @@ $("body").bind("mousewheel", function (evt, chg) {
 function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  
+
     for (var i = 0; i < 6; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-  
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
     return text;
-  }
+}
 
 $(".navLink").click(function () {
 
@@ -93,23 +93,28 @@ $(".addGroup").click(function () {
     let g_name = $("#new_groupName").val();
     let b_id = $(".b_id").attr("id");
     let rnd_id = makeid();
-    
-    $.ajax({
-        method: "post",
-        url: "/groups",
-        data: {
-            g_name: g_name,
-            b_id: b_id,
-            rnd_id: rnd_id
-        },
-        success(res) {
-            alert("Neue Gruppe hinzugefügt");
-            getGroups();
-        },
-        error(err) {
-            console.log(err);
-        }
-    });
+    if (g_name == "") {
+        alert("Bitte alle Felder ausfüllen !");
+    }
+    else {
+        $.ajax({
+            method: "post",
+            url: "/groups",
+            data: {
+                g_name: g_name,
+                b_id: b_id,
+                rnd_id: rnd_id
+            },
+            success(res) {
+                alert("Neue Gruppe hinzugefügt");
+                getGroups();
+            },
+            error(err) {
+                console.log(err);
+            }
+        });
+    }
+
 });
 
 function getGroups() {
@@ -178,11 +183,13 @@ $(".anyClass").on("click", ".group_name", function () {
                 $("#groupCount").text(res[0].pers_anz);
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
+                    
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
-                    <p class="frage_element">`+ element.frage + `
-                        <i class="material-icons right bearbeiten">create</i></p>
+                    <p class="frage_element">`+ element.frage + `</p>
+                    <i class="material-icons right bearbeiten">create</i>
                         <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
+                        
                     </div>
                     </div>`
                     $(".scrollfrage").append(fragen);
@@ -207,7 +214,7 @@ $(document).on("click", ".bearbeiten", function () {
     $("#updateFrage").val(frg);
     $("#updateAntwort").val(ant);
     $(".bottomNav").removeClass("fixed-bottom");
-    
+
 });
 
 $("#btnRandom").click(function () {
@@ -235,22 +242,28 @@ $("#btnRandom").click(function () {
 $(".joinGroup").click(function () {
     let rnd_id = $("#join_groupName").val();
     let b_id = $(".b_id").attr("id");
-    $.ajax({
-        url: "/groups/" + b_id,
-        method: "put",
-        data: {
-            b_id: b_id,
-            rnd_id: rnd_id
-        },
-        success(res) {
-            console.log("Gruppe gejoint" + res);
-            alert("Gruppe beigetreten");
-            getGroups();
-        },
-        error(err) {
-            console.log(err);
-        }
-    });
+    if (rnd_id == "") {
+        alert("Bitte alle Felder ausfüllen !");
+    }
+    else {
+        $.ajax({
+            url: "/groups/" + b_id,
+            method: "put",
+            data: {
+                b_id: b_id,
+                rnd_id: rnd_id
+            },
+            success(res) {
+                console.log("Gruppe gejoint" + res);
+                alert("Gruppe beigetreten");
+                getGroups();
+            },
+            error(err) {
+                console.log(err);
+            }
+        });
+    }
+
 });
 
 $(".addInhalt").click(function () {
@@ -263,24 +276,24 @@ $(".addInhalt").click(function () {
         let frage = $("#newFrage").val();
         let antwort = $("#newAntwort").val();
 
-            $.ajax({
-                url: "/content/" + rnd_id,
-                method: "post",
-                data: {
-                    frage: frage,
-                    antwort: antwort,
-                    rnd_id: rnd_id
-                },
-                success(res) {
-                    alert("Inhalt hinzugefügt");
-                    getContent();
-                    console.log("Inhalt hinzugefügt");
-                },
-                error(err) {
-                    console.log(err);
-                }
-            })
-        
+        $.ajax({
+            url: "/content/" + rnd_id,
+            method: "post",
+            data: {
+                frage: frage,
+                antwort: antwort,
+                rnd_id: rnd_id
+            },
+            success(res) {
+                alert("Inhalt hinzugefügt");
+                getContent();
+                console.log("Inhalt hinzugefügt");
+            },
+            error(err) {
+                console.log(err);
+            }
+        })
+
         $(".popup").fadeOut(500);
         $(".bottomNav").addClass("fixed-bottom");
     }
@@ -298,8 +311,10 @@ function getContent() {
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
-                    <p class="frage_element">`+ element.frage + `v<i class="material-icons right">create</i></p>
-                        <div class="antwort" value="`+ element.antwort + `"></div>
+                    <i class="material-icons right bearbeiten">create</i>
+                    <p class="frage_element">`+ element.frage + `</p>
+                        
+                        <div class="antwort" value="`+ element.antwort + `"></div> 
                         <hr>
                     </div>
                     </div>`
@@ -316,23 +331,29 @@ function getContent() {
 $(".updateInhalt").click(function () {
     let frg = $("#updateFrage").val();
     let ant = $("#updateAntwort").val();
-    $.ajax({
-        method: "put",
-        url: "/content/"+fid,
-        data:{
-            fid: fid,
-            frage: frg,
-            antwort: ant
-        },
-        success(res){
-            console.log("Inhalt verändert");
-            $(".frg").eq(indexContent).find(".frage_element").text(frg);
-            $(".frg").eq(indexContent).find(".antwort").attr("value", ant);
-        },
-        error(err){
-            console.log(err);
-        }
-    })
+    if (frg == "" || ant == "") {
+        alert("Bitte alle Felder ausfüllen !");
+    }
+    else {
+        $.ajax({
+            method: "put",
+            url: "/content/" + fid,
+            data: {
+                fid: fid,
+                frage: frg,
+                antwort: ant
+            },
+            success(res) {
+                console.log("Inhalt verändert");
+                $(".frg").eq(indexContent).find(".frage_element").text(frg);
+                $(".frg").eq(indexContent).find(".antwort").attr("value", ant);
+            },
+            error(err) {
+                console.log(err);
+            }
+        })
+    }
+
 });
 
 

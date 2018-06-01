@@ -282,6 +282,24 @@ async function updateContent(obj) {
     }
 }
 
+/*async function deleteContent(obj) {
+    try {
+        console.log(obj.frage + "  " + obj.antwort);
+        connection.query('UPDATE inhalt SET frage=?, antwort=? WHERE f_id = ?', [obj.frage, obj.antwort, obj.fid], function (err, rows, fields) {
+            if (!err) {
+                console.log("Inhalt verändert");
+            }
+            else {
+                throw err;
+            }
+        });
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}*/
+
 module.exports = {
     getUsers,
     addUser,
