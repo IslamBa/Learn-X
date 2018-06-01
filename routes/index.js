@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
 var datenbank = require("../model/datenbank");
 
-/* GET home page. */
-/*router.get('/', async function (req, res, next) {
-  res.render('index', { title: 'Express', users: await datenbank.getUserGroups('islam') });
-});*/
+const passport = require('passport');
+const { ensureLoggedIn } = require('connect-ensure-login');
+
+require('./../config/passport')
+
+router.get('/', function (req, res, next) {
+  res.render('login');
+});
 
 router.get('/login', function (req, res, next) {
   res.render('login');
@@ -16,8 +19,19 @@ router.get('/registrieren', function (req, res, next) {
   res.render('registrieren');
 });
 
-router.get('/home/:name', async function (req, res, next) {
-  res.render('home', {benutzer: await datenbank.getUser(req.params.name) });
+router.post('/login',
+  passport.authenticate('local', {
+    failureRedirect: '/',
+    successRedirect: '/home'
+  }));
+
+router.get('/home',
+  ensureLoggedIn(),
+  (req, res) => res.render('home', { benutzer: req.user }));
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/')
 });
 
 router.get('/benutzer', async function (req, res, next) {
@@ -27,6 +41,15 @@ router.get('/benutzer', async function (req, res, next) {
     res.status(400).send(error);
   }
 });
+
+
+// router.get('/benutzer/:name', async function (req, res, next) {
+//   try {
+//     res.status(200).send(await datenbank.getUser(req.params.name));
+//   } catch (error) {
+//     res.status(400).send("Benutername nicht bekannt");
+//   }
+// });
 
 router.get('/groups/:b_id', async function (req, res, next) {
   try {
@@ -58,22 +81,6 @@ router.put('/content/:fid', async function (req, res, next) {
     res.status(200).send(await datenbank.updateContent(req.body));
   } catch (error) {
     res.status(400).send(error);
-  }
-});
-
-router.get('/benutzer/:name', async function (req, res, next) {
-  try {
-    res.status(200).send(await datenbank.getUser(req.params.name));
-  } catch (error) {
-    res.status(400).send("Benutername nicht bekannt");
-  }
-});
-
-router.post('/benutzer', async function (req, res, next) {
-  try {
-    res.status(200).send(await datenbank.loginCheck(req.body));
-  } catch (error) {
-    res.status(400).send("Benutername nicht bekannt");
   }
 });
 
@@ -112,6 +119,8 @@ router.put('/groups/:b_id', async function (req, res, next) {
 router.get('/impressum', function (req, res) {
   res.render('impressum')
 });
+
+
 
 
 module.exports = router;

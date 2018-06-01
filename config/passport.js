@@ -1,27 +1,26 @@
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var { findById, findByUsername } = require('./../model/users');
+const passport = require('passport');
+const { Strategy } = require('passport-local').Strategy;
+const {getUser} = require('./../model/datenbank');
 
-passport.use(new Strategy(
-  function (name, password, cb) {
-    findByUsername(name, function (err, user) {
-      if (err) return cb(err); 
-      if (!user) return cb(null, false); 
-      if (user.passwort != password) return cb(null, false); 
-      return cb(null, user);
-    });
-  }));
+passport.use(new Strategy(async (name, passwort, done) => {
+    try {
+      let user = await getUser(name); 
+      if (!user) return done(null, false);
+      if (user.passwort != passwort) return done(null, false);
+      return done(null, user);
+    } catch (error) {
+      return done(null,null);
+    }
+  }
+));
 
+passport.serializeUser((user, done) => done(null, user.name));
 
-passport.serializeUser(function (user, cb) {
-  cb(null, user.id);
+passport.deserializeUser(async (name, done) => {
+   try {
+     let user = await getUser(name);
+     done(null,user);
+   } catch (err) {
+     done(err,null);
+   }
 });
-
-passport.deserializeUser(function (id, cb) {
-  findById(id, function (err, user) {
-    if (err) return cb(err); 
-    cb(null, user);
-  });
-});
-
-
