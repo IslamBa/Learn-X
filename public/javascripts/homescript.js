@@ -364,7 +364,7 @@ $(".deleteInhalt").click(function () {
         success(res){
             console.log("Inhalt gelöscht");
             $(".frg").eq(indexContent).remove();
-            $("#popup4").hide(600);
+         
         },
         error(err){
             console.log(err);
