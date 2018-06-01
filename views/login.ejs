@@ -45,6 +45,18 @@
         </a>
     </div>
 
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <input class="lo" type="submit" value="Submit" class="btn btn-outline-primary mt-4">
+    </form>
+
     <script src="../jquery/dist/jquery.min.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../materialize-css/dist/js/materialize.min.js"></script>
