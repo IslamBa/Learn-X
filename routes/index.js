@@ -84,6 +84,14 @@ router.put('/content/:fid', async function (req, res, next) {
   }
 });
 
+router.delete('/content/:fid', async function (req, res, next) {
+  try {
+    res.status(200).send(await datenbank.deleteContent(req.params.fid));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 router.post('/registrieren/neu', async function (req, res, next) {
   try {
     res.status(200).send(await datenbank.addUser(req.body));

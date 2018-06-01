@@ -205,8 +205,8 @@ $(".anyClass").on("click", ".group_name", function () {
                     let fragen = `<div class="row frg">
                     
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
+                    <i class="material-icons right bearbeiten">create</i>
                     <p class="frage_element">`+ element.frage + `</p>
-                        <i class="material-icons right bearbeiten">create</i>
                         <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
                         
@@ -318,6 +318,8 @@ $(".addInhalt").click(function () {
         $(".popup").fadeOut(500);
         $(".bottomNav").addClass("fixed-bottom");
     }
+    $('#newFrage').val('');
+    $('#newAntwort').val('');
 });
 
 function getContent() {
@@ -332,7 +334,8 @@ function getContent() {
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
-                    <p class="frage_element">`+ element.frage + `</p><i class="material-icons bearbeiten right">create</i>
+                    <i class="material-icons bearbeiten right">create</i>
+                    <p class="frage_element">`+ element.frage + `</p>
                         <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
                     </div>
@@ -375,6 +378,21 @@ $(".updateInhalt").click(function () {
         })
     }
 
+});
+
+$(".deleteInhalt").click(function () {
+    $.ajax({
+        method: "delete",
+        url: "/content/"+fid,
+        success(res){
+            console.log("Inhalt gelöscht");
+            $(".frg").eq(indexContent).remove();
+         
+        },
+        error(err){
+            console.log(err);
+        }
+    })
 });
 
 
