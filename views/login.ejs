@@ -18,48 +18,38 @@
     <div class="container text-center lgn_con">
         <img src="../images/Logo_white.svg" width="280px;">
     </div>
-    <div class="container login_daten">
-        <form>
-            <div class="input-field col s6">
-                <input class='validate' id="name" type="text" class="validate">
-                <label for="name">NAME</label>
+    <form action="/login" method="post">
+        <div class="container">
+            <div class="form-group input-field">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" required>
             </div>
-            <div class="input-field col s6">
-                <input class='validate' id="password" type="password" class="validate">
-                <label for="password">PASSWORT</label>
+            <br>
+            <div class="input-field">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" required>
             </div>
-        </form>
-    </div>
-    <div class="container login_buttons">
-        <div class="row">
-            <a class="waves-effect waves-light btn-large btn_white login">LOGIN</a>
+            <div class="row">
+                <button class="lo waves-effect waves-light btn-large btn_white mt-4" type="submit" value="Submit">LOGIN</button>
+            </div>
+            <div class="row">
+                <a href="/registrieren" class="waves-effect waves-light btn-large btn_dark">REGISTRIEREN</a>
+            </div>
         </div>
-      <div class="row">
-            <a href="/registrieren" class="waves-effect waves-light btn-large btn_dark">REGISTRIEREN</a>
-        </div>
-
-    </div>
+    </form>
+    
     <div class="text-center">
         <a href="/impressum">
             <p class="imp">Impressum</p>
         </a>
     </div>
 
-    <form action="/login" method="post">
-        <div class="form-group">
-            <label>Username:</label>
-            <input type="text" name="username" class="form-control" required>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-        <input class="lo" type="submit" value="Submit" class="btn btn-outline-primary mt-4">
-    </form>
+    
 
     <script src="../jquery/dist/jquery.min.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../materialize-css/dist/js/materialize.min.js"></script>
     <script src="../javascripts/login.js"></script>
 </body>
+
 </html>

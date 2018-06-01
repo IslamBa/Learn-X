@@ -311,7 +311,7 @@ function getContent() {
                 res.forEach(element => {
                     let fragen = `<div class="row frg">
                     <div value="`+ element.f_id + `" class="col-lg-12 col-md-12 col-sm-12 frage">
-                    <p class="frage_element">`+ element.frage + `</p><i class="material-icons right">create</i>
+                    <p class="frage_element">`+ element.frage + `</p><i class="material-icons bearbeiten right">create</i>
                         <div class="antwort" value="`+ element.antwort + `"></div>
                         <hr>
                     </div>
