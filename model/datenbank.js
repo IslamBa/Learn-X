@@ -1,4 +1,7 @@
 var mysql = require('mysql');
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 var connection = mysql.createConnection({
     user: "root",
     host: "localhost",
@@ -62,8 +65,8 @@ async function getUser(name) {
         let promise = new Promise(resolve => {
             connection.query('SELECT * FROM benutzer WHERE BINARY name = ?', name, function (err, rows, fields) {
                 if (!err) {
-                    if(!rows.length) resolve("fehler")
-                    else{
+                    if (!rows.length) resolve("fehler")
+                    else {
                         var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
                         console.log(user);
                         resolve(user);
@@ -190,12 +193,15 @@ async function addUser(obj) {
         });
         if (gleicherName == false) {
             var sql = "INSERT INTO benutzer (name, passwort) VALUES ?";
-            var values = [
-                [obj.name, obj.passwort]
-            ];
-            connection.query(sql, [values], function (err, rows, fields) {
-                if (err) throw err;
-                console.log("Number of records inserted: " + rows.affectedRows);
+            bcrypt.hash(obj.passwort, saltRounds).then(function (hash) {
+
+                var values = [
+                    [obj.name, hash]
+                ];
+                connection.query(sql, [values], function (err, rows, fields) {
+                    if (err) throw err;
+                    console.log("Number of records inserted: " + rows.affectedRows);
+                });
             });
         }
         else {
