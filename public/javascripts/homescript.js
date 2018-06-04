@@ -5,6 +5,25 @@ $("body").bind("mousewheel", function (evt, chg) {
     evt.preventDefault();
 });
 
+function getHtmlInjection(input){
+    var inp = input.split("");
+    for(var i = 0; i < inp.length;i++){
+        if(inp[i] == "<"){
+            console.log(inp[i]);
+            inp[i] = "&lt";
+            console.log(inp[i]);
+        }
+        else if(inp[i] == ">"){
+            inp[i] = "&gt";
+        }
+    }
+    console.log(inp);
+    inp = inp.join("");
+    console.log(inp);
+    return inp;
+    
+}
+
 function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -93,6 +112,7 @@ $(".addGroup").click(function () {
     let g_name = $("#new_groupName").val();
     let b_id = $(".b_id").attr("id");
     let rnd_id = makeid();
+    getHtmlInjection(g_name);
     if (g_name == "") {
         alert("Bitte alle Felder ausfüllen !");
     }
@@ -242,6 +262,7 @@ $("#btnRandom").click(function () {
 $(".joinGroup").click(function () {
     let rnd_id = $("#join_groupName").val();
     let b_id = $(".b_id").attr("id");
+    getHtmlInjection(rnd_id);
     if (rnd_id == "") {
         alert("Bitte alle Felder ausfüllen !");
     }
@@ -273,8 +294,8 @@ $(".addInhalt").click(function () {
         alert("Bitte alle Felder ausfüllen !");
     }
     else {
-        let frage = $("#newFrage").val();
-        let antwort = $("#newAntwort").val();
+        let frage = getHtmlInjection($("#newFrage").val());
+        let antwort = getHtmlInjection($("#newAntwort").val());
 
         $.ajax({
             url: "/content/" + rnd_id,
@@ -331,7 +352,9 @@ function getContent() {
 
 $(".updateInhalt").click(function () {
     let frg = $("#updateFrage").val();
+    getHtmlInjection(frg);
     let ant = $("#updateAntwort").val();
+    getHtmlInjection(ant);
     if (frg == "" || ant == "") {
         alert("Bitte alle Felder ausfüllen !");
     }
