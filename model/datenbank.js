@@ -20,7 +20,7 @@ async function getUsers() {
             if (!err) {
                 var users = [];
                 for (let el of rows) {
-                    users.push({ b_id: el.b_id, name: el.name, passwort: el.passwort })
+                    users.push({ name: el.name});
                 }
                 //var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
                 resolve(users);
@@ -68,10 +68,9 @@ async function getUser(name) {
                     if (!rows.length) resolve("fehler")
                     else {
                         var user = { b_id: rows[0].b_id, name: rows[0].name, passwort: rows[0].passwort };
-                        console.log(user);
+                        //console.log(user);
                         resolve(user);
                     }
-
                 }
                 else {
                     reject();

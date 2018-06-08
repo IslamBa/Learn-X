@@ -6,7 +6,6 @@ $("#btnReg").click(function () {
         method: "get",
         url: "/benutzer",
         success(res) {
-            console.log(res);
             $.ajax({
                 url: "/registrieren/neu",
                 method: "post",

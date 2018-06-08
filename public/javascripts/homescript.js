@@ -192,7 +192,7 @@ $(".anyClass").on("click", ".group_name", function () {
         url: "/content/" + rnd_id,
         success(res) {
             alert("gruppe ausgewählt")
-            console.log(res);
+            //console.log(res);
             $(".gruppe").attr("id", rnd_id);
             var random = Math.floor((Math.random() * res.length) + 0);
             $(".frg").remove();
