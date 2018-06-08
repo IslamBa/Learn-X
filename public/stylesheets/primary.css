@@ -243,3 +243,6 @@ padding-left: 0px;
       }
 }
 
+.btn:focus, .btn-large:focus, .btn-floating:focus {
+    background-color: #ffffff;
+}

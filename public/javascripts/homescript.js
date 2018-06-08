@@ -121,7 +121,7 @@ $(".addGroup").click(function () {
                 rnd_id: rnd_id
             },
             success(res) {
-                alert("Neue Gruppe hinzugefügt");
+                Materialize.toast("Neue Gruppe hinzugefügt !", 1000);
                 getGroups();
             },
             error(err) {
@@ -246,6 +246,9 @@ $("#btnRandom").click(function () {
                     $("#rndFrage").text(res[random].frage);
                     $("#rndAntwort").text(res[random].antwort);
                 }
+                else {
+                    Materialize.toast("Keine Frage vorhanden !", 1000);
+                }
             },
             error(err) {
                 console.log(err);
@@ -270,7 +273,7 @@ $(".joinGroup").click(function () {
             },
             success(res) {
                 console.log("Gruppe gejoint" + res);
-                alert("Gruppe beigetreten");
+                Materialize.toast("Gruppe beitreten !", 1000);
                 getGroups();
             },
             error(err) {
@@ -362,6 +365,7 @@ $(".updateInhalt").click(function () {
                 antwort:  getHtmlInjection(ant)
             },
             success(res) {
+                Materialize.toast("Inhalt geändert !", 1000);
                 console.log("Inhalt verändert");
                 $(".frg").eq(indexContent).find(".frage_element").text(frg);
                 $(".frg").eq(indexContent).find(".antwort").attr("value", ant);

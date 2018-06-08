@@ -91,3 +91,4 @@ $(".deleteInhalt").click(function(){
     $(".popup").fadeOut(500);
     $(".bottomNav").addClass("fixed-bottom");
 })
+
