@@ -30,7 +30,7 @@ app.use(session({
   secret: 'l love sew',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 600000 }
 }));  
 
 

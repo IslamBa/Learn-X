@@ -53,5 +53,9 @@ a {
 }
 
 .arrBack{
-    color:white;
+    color:white !important;
+}
+
+.input_color{
+    color:white !important;
 }
