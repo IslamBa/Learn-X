@@ -112,16 +112,15 @@ $(".addGroup").click(function () {
     let g_name = $("#new_groupName").val();
     let b_id = $(".b_id").attr("id");
     let rnd_id = makeid();
-    getHtmlInjection(g_name);
     if (g_name == "") {
-        alert("Bitte alle Felder ausfüllen !");
+        Materialize.toast("Bitte alle Felder ausfüllen !", 1000);
     }
     else {
         $.ajax({
             method: "post",
             url: "/groups",
             data: {
-                g_name: g_name,
+                g_name: getHtmlInjection(g_name),
                 b_id: b_id,
                 rnd_id: rnd_id
             },
@@ -191,6 +190,7 @@ $(".anyClass").on("click", ".group_name", function () {
         method: "get",
         url: "/content/" + rnd_id,
         success(res) {
+            Materialize.toast("Gruppe ausgewählt !", 1000);
             console.log(res);
             $(".gruppe").attr("id", rnd_id);
             var random = Math.floor((Math.random() * res.length) + 0);
@@ -237,7 +237,7 @@ $(document).on("click", ".bearbeiten", function () {
 });
 
 $("#btnRandom").click(function () {
-    if ($("#groupID").text() == "-") alert("Bitte Gruppe auswählen");
+    if ($("#groupID").text() == "-") Materialize.toast("Bitte Gruppe auswählen !", 1000);
     else {
         var g_id = $(".gruppe").attr("id");
         $.ajax({
@@ -261,9 +261,8 @@ $("#btnRandom").click(function () {
 $(".joinGroup").click(function () {
     let rnd_id = $("#join_groupName").val();
     let b_id = $(".b_id").attr("id");
-    getHtmlInjection(rnd_id);
     if (rnd_id == "") {
-        alert("Bitte alle Felder ausfüllen !");
+        Materialize.toast("Bitte alle Felder ausfüllen !", 1000);
     }
     else {
         $.ajax({
@@ -271,7 +270,7 @@ $(".joinGroup").click(function () {
             method: "put",
             data: {
                 b_id: b_id,
-                rnd_id: rnd_id
+                rnd_id: getHtmlInjection(rnd_id)
             },
             success(res) {
                 console.log("Gruppe gejoint" + res);
@@ -290,22 +289,22 @@ $(".addInhalt").click(function () {
     let rnd_id = $(".gruppe").attr("id");
     if (rnd_id == undefined) { alert("Bitte Gruppe auswählen"); }
     else if ($("#newFrage").val() == "" || $("#newAntwort").val() == "") {
-        alert("Bitte alle Felder ausfüllen !");
+        Materialize.toast("Bitte alle Felder ausfüllen !", 1000);
     }
     else {
-        let frage = getHtmlInjection($("#newFrage").val());
-        let antwort = getHtmlInjection($("#newAntwort").val());
+        let frage = $("#newFrage").val();
+        let antwort = $("#newAntwort").val();
 
         $.ajax({
             url: "/content/" + rnd_id,
             method: "post",
             data: {
-                frage: frage,
-                antwort: antwort,
+                frage: getHtmlInjection(frage),
+                antwort: getHtmlInjection(antwort),
                 rnd_id: rnd_id
             },
             success(res) {
-                alert("Inhalt hinzugefügt");
+                Materialize.toast("Inhalt hinzugefügt !", 1000);
                 getContent();
                 console.log("Inhalt hinzugefügt");
             },
@@ -351,11 +350,11 @@ function getContent() {
 
 $(".updateInhalt").click(function () {
     let frg = $("#updateFrage").val();
-    getHtmlInjection(frg);
+    
     let ant = $("#updateAntwort").val();
-    getHtmlInjection(ant);
+   
     if (frg == "" || ant == "") {
-        alert("Bitte alle Felder ausfüllen !");
+        Materialize.toast("Bitte alle Felder ausfüllen !", 1000);
     }
     else {
         $.ajax({
@@ -363,8 +362,8 @@ $(".updateInhalt").click(function () {
             url: "/content/" + fid,
             data: {
                 fid: fid,
-                frage: frg,
-                antwort: ant
+                frage: getHtmlInjection(frg),
+                antwort:  getHtmlInjection(ant)
             },
             success(res) {
                 console.log("Inhalt verändert");
