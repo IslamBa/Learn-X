@@ -9,17 +9,13 @@ function getHtmlInjection(input){
     var inp = input.split("");
     for(var i = 0; i < inp.length;i++){
         if(inp[i] == "<"){
-            console.log(inp[i]);
             inp[i] = "&lt";
-            console.log(inp[i]);
         }
         else if(inp[i] == ">"){
             inp[i] = "&gt";
         }
     }
-    console.log(inp);
     inp = inp.join("");
-    console.log(inp);
     return inp;
     
 }
@@ -191,7 +187,7 @@ $(".anyClass").on("click", ".group_name", function () {
         url: "/content/" + rnd_id,
         success(res) {
             Materialize.toast("Gruppe ausgewählt !", 1000);
-            console.log(res);
+            console.log("Content von Gruppe erhalten");
             $(".gruppe").attr("id", rnd_id);
             var random = Math.floor((Math.random() * res.length) + 0);
             $(".frg").remove();
@@ -244,7 +240,7 @@ $("#btnRandom").click(function () {
             method: "get",
             url: "/content/" + g_id,
             success(res) {
-                console.log(res);
+                console.log("Zufällige Frage erhalten");
                 var random = Math.floor((Math.random() * res.length) + 0);
                 if (res.length > 0) {
                     $("#rndFrage").text(res[random].frage);
