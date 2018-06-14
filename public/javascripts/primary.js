@@ -1,5 +1,9 @@
 var count = 0;
 
+$(document).ready(function(){
+
+})
+
 //Damit kann die Antwort angezeigt werden.
 $(".drop-icon").click(function () {
     if (count == 0) {
@@ -45,7 +49,13 @@ $(".beitritt-group").click(function () {
  })
 
  $(".addfrage").click(function () {
-    $(".bottomNav").removeClass("fixed-bottom");
+    let rnd_id = $(".gruppe").attr("id");
+    if (rnd_id == undefined) { Materialize.toast("Bitte Gruppe auswählen !", 1000); }
+    else{
+        $("#popup3").show();
+        $(".bottomNav").removeClass("fixed-bottom");
+    }
+    
  })
 
 //Pop Up öffnen
@@ -91,4 +101,3 @@ $(".deleteInhalt").click(function(){
     $(".popup").fadeOut(500);
     $(".bottomNav").addClass("fixed-bottom");
 })
-

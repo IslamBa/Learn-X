@@ -286,8 +286,7 @@ $(".joinGroup").click(function () {
 
 $(".addInhalt").click(function () {
     let rnd_id = $(".gruppe").attr("id");
-    if (rnd_id == undefined) { alert("Bitte Gruppe auswählen"); }
-    else if ($("#newFrage").val() == "" || $("#newAntwort").val() == "") {
+    if ($("#newFrage").val() == "" || $("#newAntwort").val() == "") {
         Materialize.toast("Bitte alle Felder ausfüllen !", 1000);
     }
     else {

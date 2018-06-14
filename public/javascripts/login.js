@@ -38,3 +38,9 @@ $(document).keypress(function(event) {
         $(".login").click();
     }
 });
+
+$(".login").click(function(){
+    $(document).ready(function(){
+        $(".nav2").click();
+    })
+})
