@@ -8,6 +8,11 @@ const { ensureLoggedIn } = require('connect-ensure-login');
 
 require('./../config/passport')
 
+router.use(function(req, res, next) {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+});
+
 
 router.get('/', function (req, res, next) {
   res.render('login');
@@ -33,6 +38,7 @@ router.get('/home',
 
 router.get('/logout', (req, res) => {
   req.logout();
+  console.log("test");
   res.redirect('/');
 });
 
