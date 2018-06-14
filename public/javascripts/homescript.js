@@ -30,8 +30,6 @@ function makeid() {
     return text;
 }
 
-
-
 $(".navLink").click(function () {
 
     $(".main").enable();

@@ -5,17 +5,16 @@ var datenbank = require("../model/datenbank");
 const passport = require('passport');
 const { ensureLoggedIn } = require('connect-ensure-login');
 
-var flash = require('connect-flash');
 
 require('./../config/passport')
 
 
 router.get('/', function (req, res, next) {
-  res.render('login', { messages: req.flash('Warnmeldung') });
+  res.render('login');
 });
 
 router.get('/login', function (req, res, next) {
-  res.render('login', { messages: req.flash('Warnmeldung') });
+  res.render('login');
 });
 
 router.get('/registrieren', function (req, res, next) {
@@ -25,8 +24,7 @@ router.get('/registrieren', function (req, res, next) {
 router.post('/login',
   passport.authenticate('local', {
     failureRedirect: '/',
-    successRedirect: '/home',
-    failureFlash: true
+    successRedirect: '/home'
   }));
 
 router.get('/home',
@@ -35,7 +33,7 @@ router.get('/home',
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/')
+  res.redirect('/');
 });
 
 router.get('/benutzer', async function (req, res, next) {
