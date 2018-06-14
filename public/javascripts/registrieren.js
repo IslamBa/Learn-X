@@ -16,7 +16,7 @@ $("#btnReg").click(function () {
                     success(res) {
                         Materialize.toast('Sie wurden registriert !', 1000);
                         function later(){
-                            window.location = "/login";
+                            window.location = "/";
                         }
 
                         setTimeout(later,1000);

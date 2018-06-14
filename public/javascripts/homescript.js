@@ -87,6 +87,8 @@ $(".navLink").click(function () {
     }
 });
 
+
+
 $(".main").onepage_scroll({
     sectionContainer: "section",
     easing: "ease",
@@ -103,6 +105,8 @@ $(".main").onepage_scroll({
     responsiveFallback: false,
     direction: "horizontal"
 });
+
+$(".navLink").eq(1).click();
 
 $(".addGroup").click(function () {
     let g_name = $("#new_groupName").val();
@@ -324,7 +328,7 @@ function getContent() {
         method: "get",
         url: "/content/" + rnd_id,
         success(res) {
-            console.log(res);
+            console.log("Aktuellen Content hinzugefügt");
             if (res.length > 0) {
                 $(".frg").remove();
                 res.forEach(element => {
