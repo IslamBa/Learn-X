@@ -30,6 +30,8 @@ function makeid() {
     return text;
 }
 
+
+
 $(".navLink").click(function () {
 
     $(".main").enable();
@@ -87,6 +89,8 @@ $(".navLink").click(function () {
     }
 });
 
+
+
 $(".main").onepage_scroll({
     sectionContainer: "section",
     easing: "ease",
@@ -103,6 +107,8 @@ $(".main").onepage_scroll({
     responsiveFallback: false,
     direction: "horizontal"
 });
+
+$(".navLink").eq(1).click();
 
 $(".addGroup").click(function () {
     let g_name = $("#new_groupName").val();
