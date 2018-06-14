@@ -325,7 +325,7 @@ function getContent() {
         method: "get",
         url: "/content/" + rnd_id,
         success(res) {
-            console.log(res);
+            console.log("Aktuellen Content hinzugefügt");
             if (res.length > 0) {
                 $(".frg").remove();
                 res.forEach(element => {
